@@ -1,0 +1,2 @@
+开发必须遵守规定
+1.spring的mvc的自定义controller必须继承BaseController
