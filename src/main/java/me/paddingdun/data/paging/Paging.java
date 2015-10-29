@@ -29,4 +29,25 @@ public class Paging implements Serializable{
 	public void setPageSize(Integer pageSize) {
 		this.pageSize = pageSize;
 	}
+	
+	private Integer start;
+	private Integer length;
+	public Integer getStart() {
+		Integer tmp = page - 1;
+		tmp = tmp < 0 ? 0  : tmp;
+		this.start = tmp * pageSize;
+		return start;
+	}
+//	public void setStart(Integer start) {
+//		this.start = start;
+//	}
+	public Integer getLength() {
+		Integer tmp = page - 1;
+		tmp = tmp < 0 ? 0  : tmp;
+		this.length = (tmp + 1) * pageSize;
+		return length;
+	}
+//	public void setLength(Integer length) {
+//		this.length = length;
+//	}
 }

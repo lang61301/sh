@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.isoftstone.cbems.sm.modules.user.repository.UserDao" >
+  <!-- 用户返回map -->
+  <resultMap id="UserMap" type="me.paddingdun.data.User" >
+    <id column="id" property="id"  />
+    <result column="name" property="name"/>
+  </resultMap>
+ 
+ <!-- 保存user -->
+ <update id="saveUser" parameterType="me.paddingdun.data.User" useGeneratedKeys="true" keyProperty="id">
+ 	insert into tb_user(name)
+ 	values(#{user.name})
+ </update>
+  
+ <!-- 更新 user-->
+ <update id="updateUser" parameterType="me.paddingdun.data.User">
+ 	update tb_user
+ 	set name = #{user.name},
+ 	where id = #{user.id}
+ </update>
+ <!-- 删除用户 -->
+ <delete id="deleteUser" parameterType="java.lang.Long">
+ 	delete from tb_user where id = #{0}
+ </delete>
+  
+  <sql id="queryUserSql">
+  	select id, name
+	FROM
+		tb_user 
+	<where>
+			<if test="user != null">
+				and 1 = 1
+			</if>
+	</where>
+  </sql>
+  
+  <select id="getUser" parameterType="me.paddingdun.data.User" resultMap="UserMap">
+  	<include refid="queryUserSql"/>
+  	<include refid="common.paging"/>
+  </select>
+  
+  <select id="getUserTotal" resultType="int">
+  	select count(1) from (
+  		<include refid="queryUserSql"/>
+  	) t1
+  </select>
+</mapper>
