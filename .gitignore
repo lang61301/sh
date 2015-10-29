@@ -41,8 +41,8 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
-.settings/org.eclipse.wst.validation.prefs
-.settings/.jsdtscope
 *.prefs
 *.classpath
 .project
+.settings/*
+target/*
