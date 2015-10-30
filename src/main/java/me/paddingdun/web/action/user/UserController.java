@@ -15,7 +15,7 @@ import me.paddingdun.data.User;
 import me.paddingdun.data.json.JsonResult;
 import me.paddingdun.data.paging.IDataCollection;
 import me.paddingdun.data.paging.Paging;
-import me.paddingdun.service.IUserService;
+import me.paddingdun.service.user.IUserService;
 import me.paddingdun.util.GsonHelper;
 import me.paddingdun.web.action.BaseController;
 import me.paddingdun.web.util.WebHelper;

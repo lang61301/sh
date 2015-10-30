@@ -4,7 +4,7 @@
   	<sql id="paging">
 		<if test = "paging !=null">
 			<if test="paging.start!=null and paging.length !=null">
-				limit #{paging.page -1 },#{paging.length}
+				limit #{paging.start },#{paging.length}
 			</if>
 		</if>
 	</sql>

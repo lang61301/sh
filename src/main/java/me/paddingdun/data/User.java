@@ -2,7 +2,6 @@ package me.paddingdun.data;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 
 public class User implements Serializable {
 
@@ -23,7 +22,6 @@ public class User implements Serializable {
 		this.id = id;
 	}
 
-	@Column
 	public String getName() {
 		return name;
 	}

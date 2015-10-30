@@ -1,4 +1,4 @@
-package me.paddingdun.service;
+package me.paddingdun.service.user;
 
 import me.paddingdun.data.User;
 import me.paddingdun.data.paging.IDataCollection;

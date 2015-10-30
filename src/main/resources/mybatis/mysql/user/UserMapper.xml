@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.isoftstone.cbems.sm.modules.user.repository.UserDao" >
+<mapper namespace="me.paddingdun.dao.user.IUserDao" >
   <!-- 用户返回map -->
   <resultMap id="UserMap" type="me.paddingdun.data.User" >
     <id column="id" property="id"  />
@@ -10,14 +10,14 @@
  <!-- 保存user -->
  <update id="saveUser" parameterType="me.paddingdun.data.User" useGeneratedKeys="true" keyProperty="id">
  	insert into tb_user(name)
- 	values(#{user.name})
+ 	values(#{name})
  </update>
   
  <!-- 更新 user-->
  <update id="updateUser" parameterType="me.paddingdun.data.User">
  	update tb_user
- 	set name = #{user.name},
- 	where id = #{user.id}
+ 	set name = #{name},
+ 	where id = #{id}
  </update>
  <!-- 删除用户 -->
  <delete id="deleteUser" parameterType="java.lang.Long">
@@ -29,13 +29,23 @@
 	FROM
 		tb_user 
 	<where>
+			1 = 1
 			<if test="user != null">
-				and 1 = 1
+				<if test="user.id != null">
+					and id = #{user.id}
+				</if>
+				<if test="user.name != null">
+					and name = #{user.name}
+				</if>
 			</if>
 	</where>
   </sql>
   
   <select id="getUser" parameterType="me.paddingdun.data.User" resultMap="UserMap">
+  	<include refid="queryUserSql"/>
+  </select>
+  
+  <select id="queryUser" resultMap="UserMap">
   	<include refid="queryUserSql"/>
   	<include refid="common.paging"/>
   </select>

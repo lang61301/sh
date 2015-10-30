@@ -56,49 +56,23 @@
          <property name="filters" value="mergeStat" />
      </bean>
  
-     <!-- 配置hibernate session工厂 -->
-     <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+     <!-- 配置mybatis session工厂 -->
+     <bean id="sqlSessionFactory" class="me.paddingdun.component.factory.MyBatisSessionFactory">
          <property name="dataSource" ref="dataSource" />
-         <property name="hibernateProperties">
-             <props>
-                 <!-- web项目启动时是否更新表结构 -->
-                 <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
-                 <!-- 系统使用的数据库方言，也就是使用的数据库类型 -->
-                 <prop key="hibernate.dialect">${hibernate.dialect}</prop>
-                 <!-- 是否打印Hibernate生成的SQL到控制台 -->
-                 <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
-                 <!-- 是否格式化打印出来的SQL -->
-                 <prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
-             </props>
-         </property>
- 
-         <!-- hibernate4支持,自动扫描注解方式配置的hibernate类文件,配置包名 对应的sessionFactory为:org.springframework.orm.hibernate4.LocalSessionFactoryBean-->
-         <!-- property name="packagesToScan">
-             <list>
-                 <value>me.paddingdun.data</value>
-             </list>
-         </property-->
-         
-         <!-- hibernate3, 对应的sessionFactory为:org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean-->
-         <property name="annotatedClasses">
-             <list>
-                 <value>me.paddingdun.data.User</value>
-             </list>
-         </property>
- 
-         <!-- hibernate4, 自动扫描hbm方式配置的hibernate文件和.hbm文件 -->
-         <!-- 
-         <property name="mappingDirectoryLocations">
-             <list>
-                 <value>classpath:me/paddingdun/hbm</value>
-             </list>
-         </property>
-          -->
+         <property name="mapperLocations" value="classpath:mybatis/mysql/**/*.xml" />
      </bean>
+     
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="me.paddingdun.dao" />
+		<property name="annotationClass"
+			value="org.springframework.stereotype.Repository" />
+	</bean>
  
      <!-- 配置事务管理器 -->
-     <bean name="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-         <property name="sessionFactory" ref="sessionFactory"></property>
+     <bean name="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+         <property name="dataSource" ref="dataSource" />
+         <!--  抛出异常主事务回滚 -->
+		<!-- property name="globalRollbackOnParticipationFailure" value="false"></property--> 
      </bean>
  
      <!-- 注解方式配置事物 -->
@@ -143,9 +117,10 @@
      <aop:config>
      <!-- 	   第一个 * —— 通配 任意返回值类型
 			   第二个 * —— 通配 包me.paddingdun.service下的任意class
-			   第三个 * —— 通配 包me.paddingdun.service下的任意class的任意方法 
-			   第四个 .. —— 通配 方法可以有0个或多个参数  -->
-         <aop:pointcut id="transactionPointcut" expression="execution(* me.paddingdun.service.*.*(..))" />
+			   第三个 * —— 通配 包me.paddingdun.service下的任意class的任意方法
+			   第 四个 * —— 
+			  .. —— 通配 方法可以有0个或多个参数  -->
+         <aop:pointcut id="transactionPointcut" expression="execution(* me.paddingdun.service.*..*(..))" />
          <aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice" />
      </aop:config>
      
