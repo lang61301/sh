@@ -7,6 +7,10 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	 <!-- 防止spring内存溢出监听器 -->
+     <listener>
+         <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+     </listener>
 	<!-- Spring配置文件位置 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
@@ -14,6 +18,44 @@
 				     classpath:/spring/spring-hibernate.xml
 		</param-value>
 	</context-param>
+	
+	<filter>
+	  <filter-name>loginFilter</filter-name>
+	  <filter-class>me.paddingdun.web.filter.login.LoginFilter</filter-class>
+	  <init-param>
+	   <param-name>loginUrl</param-name>
+	   <param-value>/login.jsp</param-value>
+	  </init-param>
+	  <!-- 不验证是否登录url, 用","分割 -->
+	  <init-param>
+	   <param-name>excludeUrl</param-name>
+	   <param-value>/login.jsp,/login,/logout</param-value>
+	  </init-param>
+	 </filter>
+	 <filter-mapping>
+	  <filter-name>loginFilter</filter-name>
+	  <url-pattern>/*</url-pattern>
+	 </filter-mapping>
+	
+	<!-- 字符过滤器 -->
+	 <filter>
+	  <filter-name>encodingFilter</filter-name>
+	  <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+	  <init-param>
+	   <param-name>encoding</param-name>
+	   <param-value>UTF-8</param-value>
+	  </init-param>
+	  <init-param>
+	   <param-name>forceEncoding</param-name>
+	   <param-value>true</param-value>
+	  </init-param>
+	 </filter>
+	 <filter-mapping>
+	  <filter-name>encodingFilter</filter-name>
+	  <url-pattern>/*</url-pattern>
+	  <dispatcher>REQUEST</dispatcher>
+	  <dispatcher>FORWARD</dispatcher>
+	 </filter-mapping>
 	
 	 <!-- spring mvc -->
 	 <servlet>
