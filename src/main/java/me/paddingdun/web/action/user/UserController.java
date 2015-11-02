@@ -30,7 +30,7 @@ import me.paddingdun.web.util.WebHelper;
 @RequestMapping(value="/user")
 public class UserController extends BaseController{
 
-private final static Logger logger = LoggerFactory.getLogger(UserController.class);
+	private final static Logger logger = LoggerFactory.getLogger(UserController.class);
 	
 	@Autowired
 	private IUserService userService;

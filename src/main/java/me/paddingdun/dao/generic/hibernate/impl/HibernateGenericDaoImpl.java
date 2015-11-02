@@ -31,11 +31,19 @@ import me.paddingdun.data.paging.impl.DefaultListDataCollection;
  *            2015年10月28日
  */
 public abstract class HibernateGenericDaoImpl extends HibernateTemplate implements IHibernateGenericDao {
+	
+	public <A> List<A> findObjects(String hql){
+		return findObjects(hql, null);
+	}
+	
+	public <A> List<A> findObjects(String hql, Map<String, Object> paramAndValue){
+		Query query = getSession ().createQuery (hql);
+		setQueryParameters (query, paramAndValue);
+        return query.list();
+	}
 
 	public List<Map<String, Object>> query(String hql) {
-		// TODO Auto-generated method stub
-		Query query = getSession ().createQuery (hql);
-        return query.list();
+		return query(hql, null);
 	}
 
 	public List<Map<String, Object>> query(String hql, Map<String, Object> paramAndValue) {
@@ -209,16 +217,17 @@ public abstract class HibernateGenericDaoImpl extends HibernateTemplate implemen
 	}
 
 	protected void setQueryParameters(Query query, Map<String, Object> map) {
-		for (String name : map.keySet()) {
-			Object value = map.get(name);
-			if (isArray(value)) {
-				Object[] array = toArray(value);
-				query.setParameterList(name, array);
-			} else if (value instanceof Collection) {
-				query.setParameterList(name, (Collection) value);
-			} else
-				query.setParameter(name, map.get(name));
-		}
+		if(map != null && !map.isEmpty())
+			for (String name : map.keySet()) {
+				Object value = map.get(name);
+				if (isArray(value)) {
+					Object[] array = toArray(value);
+					query.setParameterList(name, array);
+				} else if (value instanceof Collection) {
+					query.setParameterList(name, (Collection) value);
+				} else
+					query.setParameter(name, map.get(name));
+			}
 	}
 
 	private boolean isArray(Object o) {

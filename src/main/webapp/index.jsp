@@ -6,7 +6,8 @@
 </head>
 <body>
 <form action="userAdd" method="post">
-姓名:<input name="name">
+姓名:<input name="username">
+密码:<input type="password" name="password">
 
 <button class="save" type="button" value="保存">保存</button>
 </form>

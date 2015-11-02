@@ -16,6 +16,9 @@ import me.paddingdun.data.paging.IDataCollection;
  */
 public interface IHibernateGenericDao extends HibernateOperations {
 
+	<A> List<A> findObjects(String hql);
+	
+	<A> List<A> findObjects(String hql, Map<String, Object> paramAndValue);
 	
 	List<Map<String, Object>> query(String hql);
 	

@@ -19,8 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.mock.web.MockServletContext;
 
 import me.paddingdun.web.login.LoginUser;
 import me.paddingdun.web.util.SessionHelper;
@@ -39,7 +37,7 @@ public class LoginFilter implements Filter {
 	private final static Logger logger = LoggerFactory.getLogger(LoginFilter.class);
 
 	
-	private String loginUrl;
+	public static String loginUrl;
 	private Set<String> excludeUrl;
 
 	/* (non-Javadoc)
@@ -93,12 +91,12 @@ public class LoginFilter implements Filter {
 	}
 	
 	public static void main(String[] args) {
-		MockServletContext sc = new MockServletContext();
-		sc.setContextPath("ssh2");
-		MockHttpServletRequest request = new MockHttpServletRequest(sc);
-		request.setMethod("get");
-		System.out.println(request.getRequestURI());
-		System.out.println(request.getContextPath());
+//		MockServletContext sc = new MockServletContext();
+//		sc.setContextPath("ssh2");
+//		MockHttpServletRequest request = new MockHttpServletRequest(sc);
+//		request.setMethod("get");
+//		System.out.println(request.getRequestURI());
+//		System.out.println(request.getContextPath());
 		
 	}
 

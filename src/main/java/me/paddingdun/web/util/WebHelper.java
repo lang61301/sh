@@ -3,6 +3,7 @@ package me.paddingdun.web.util;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
@@ -32,5 +33,20 @@ public class WebHelper {
 		
 		out.flush();
 		out.close();
+	}
+	
+	/**
+	 * 判断是否是ajax请求;
+	 * @param request
+	 * @return
+	 */
+	public static boolean isAjaxHttprequest(HttpServletRequest request){
+		boolean result = false;
+		if ("XMLHttpRequest"
+	            .equalsIgnoreCase(request
+	                    .getHeader("X-Requested-With"))) {//ajax请求;
+			result = true;
+		}
+		return result;
 	}
 }

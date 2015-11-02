@@ -19,6 +19,7 @@
 		</param-value>
 	</context-param>
 	
+	<!-- 登录过滤器 -->
 	<filter>
 	  <filter-name>loginFilter</filter-name>
 	  <filter-class>me.paddingdun.web.filter.login.LoginFilter</filter-class>
@@ -71,4 +72,19 @@
 	  <servlet-name>springServlet</servlet-name>
 	  <url-pattern>/</url-pattern>
 	 </servlet-mapping>
+	 
+	 <!-- login servlet, 弃用使用 spring controller -->
+	 <!-- servlet>
+	  <servlet-name>loginServlet</servlet-name>
+	  <servlet-class>me.paddingdun.web.login.LoginServlet</servlet-class>
+	  <init-param>
+	   <param-name>successUrl</param-name>
+	   <param-value>/main.jsp</param-value>
+	  </init-param>
+	  <load-on-startup>2</load-on-startup>
+	 </servlet>
+	 <servlet-mapping>
+	  <servlet-name>loginServlet</servlet-name>
+	  <url-pattern>/login</url-pattern>
+	 </servlet-mapping-->
 </web-app>
