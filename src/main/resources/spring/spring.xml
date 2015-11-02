@@ -11,6 +11,6 @@
      <!-- 引入属性文件,config.properties位于src/main/resources目录下 -->
      <context:property-placeholder location="classpath:config.properties" />
  
-     <!-- service包(自动注入) -->
+     <!-- 自动扫描service包(自动注入) -->
      <context:component-scan base-package="me.paddingdun.service" />
 </beans>
