@@ -47,7 +47,7 @@ public class LoginController extends BaseController {
 	 * @param code
 	 * @return
 	 */
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value="/login", method = RequestMethod.POST)
 	public String login(@RequestParam("loginName")String loginName, 
 						@RequestParam("password")String password,
 						@RequestParam("code")String code,
@@ -88,7 +88,7 @@ public class LoginController extends BaseController {
 			}
 		}
 		
-		return "redirect:main";
+		return "redirect:/main";
 	}
 	
 	

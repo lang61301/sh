@@ -22,11 +22,19 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
-	<!-- 未配置requestmapping 的默认处理器 -->
-	<!-- mvc:default-servlet-handler /-->
+	
+	<!-- 会自动注册DefaultAnnotationHandlerMapping和AnnotationMethodHandlerAdapter两个实例 -->
+	<mvc:annotation-driven />
+	
+	<!-- 如果使用了mvc:default-servlet-handler, 一定要使用mvc:annotation-driven, 否则会找不到annotation配置的controller的requestmapping -->
+	<!-- 未配置requestmapping 的默认处理器,或者是静态资源, 默认配置"/**" 在SimpleUrlHandlerMapping -->
+	<mvc:default-servlet-handler />
+	
+	<!-- 静态资源另一种处理方式 -->
+	<!-- mvc:resources mapping="/images/**" location="/images/" /-->  
 
 	<!-- 将Controller抛出的异常转到特定View -->
-	<!-- bean
+	<bean
 		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<property name="exceptionMappings">
 			<props>
@@ -34,6 +42,6 @@
 				<prop key="java.lang.Throwable">error/500</prop>
 			</props>
 		</property>
-	</bean-->
+	</bean>
  	
 </beans>
