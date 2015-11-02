@@ -20,6 +20,7 @@ import me.paddingdun.exception.CommonException;
 import me.paddingdun.exception.IException;
 import me.paddingdun.service.user.IUserService;
 import me.paddingdun.util.SecurityHelper;
+import me.paddingdun.web.action.BaseController;
 import me.paddingdun.web.util.IAppConstant;
 import me.paddingdun.web.util.SessionHelper;
 
@@ -30,7 +31,7 @@ import me.paddingdun.web.util.SessionHelper;
  * 2015年11月2日
  */
 @Controller
-public class LoginController {
+public class LoginController extends BaseController {
 	/**
 	 * LoginController 日志变量;
 	 */
@@ -87,6 +88,12 @@ public class LoginController {
 			}
 		}
 		
+		return "redirect:main";
+	}
+	
+	
+	@RequestMapping(value = "/main", method = RequestMethod.GET)
+	public String main(){
 		return "main";
 	}
 

@@ -23,10 +23,10 @@
 	</bean>
 
 	<!-- 未配置requestmapping 的默认处理器 -->
-	<mvc:default-servlet-handler />
+	<!-- mvc:default-servlet-handler /-->
 
 	<!-- 将Controller抛出的异常转到特定View -->
-	<bean
+	<!-- bean
 		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<property name="exceptionMappings">
 			<props>
@@ -34,6 +34,6 @@
 				<prop key="java.lang.Throwable">error/500</prop>
 			</props>
 		</property>
-	</bean>
+	</bean-->
  	
 </beans>
