@@ -7,8 +7,7 @@ import java.util.Locale;
 
 import javax.annotation.PostConstruct;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Lazy;
@@ -27,7 +26,8 @@ public class MessageHolder {
 	/**
 	 * MessageHolder 日志变量;
 	 */
-	private final static Logger logger = LoggerFactory.getLogger(MessageHolder.class);
+	private final static Logger logger = Logger.getLogger(MessageHolder.class);
+
 	
 	@Autowired
 	private MessageSource messageSource;

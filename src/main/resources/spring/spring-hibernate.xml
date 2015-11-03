@@ -89,6 +89,7 @@
          <property name="annotatedClasses">
              <list>
                  <value>me.paddingdun.data.User</value>
+                 <value>me.paddingdun.data.SysLog</value>
              </list>
          </property>
  
@@ -154,5 +155,22 @@
          <aop:pointcut id="transactionPointcut" expression="execution(* me.paddingdun.service.*..*(..))" />
          <aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice" />
      </aop:config>
+     
+     
+    <!-- start log, 实现log4j的appender实现异步记录日志 -->
+    <!-- 通过注解实现该类 -->
+    <!-- bean id="AsynchronousHibernateAppender" class="me.paddingdun.component.log.log4j.appender.AsynchronousHibernateAppender" init-method="initialize" destroy-method="shutdown">
+        <property name="sessionFactory" ref="sessionFactory" />
+        <property name="transactionTemplate" ref="transactionTemplate" />
+        <property name="commonDao" ref="commonDao" />
+        <property name="loggingEventClass" value="me.paddingdun.data.SysLog"/>
+    </bean-->
+    
+    <bean id="transactionTemplate" class="org.springframework.transaction.support.TransactionTemplate"> 
+      <property name="transactionManager"> 
+        <ref bean="transactionManager"/> 
+      </property> 
+    </bean>
+    <!-- end log --> 
      
  </beans>

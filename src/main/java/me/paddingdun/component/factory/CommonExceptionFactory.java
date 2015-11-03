@@ -3,8 +3,8 @@
  */
 package me.paddingdun.component.factory;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import org.apache.log4j.Logger;
 
 import me.paddingdun.component.MessageHolder;
 import me.paddingdun.exception.CommonException;
@@ -20,7 +20,8 @@ public class CommonExceptionFactory {
 	/**
 	 * CommonExceptionFactory 日志变量;
 	 */
-	private final static Logger logger = LoggerFactory.getLogger(CommonExceptionFactory.class);
+	private final static Logger logger = Logger.getLogger(CommonExceptionFactory.class);
+
 
 	
 	/**

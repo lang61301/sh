@@ -5,8 +5,8 @@ package me.paddingdun.util;
 
 import java.security.MessageDigest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
+
 
 /**
  * @author paddingdun
@@ -18,7 +18,8 @@ public class SecurityHelper {
 	/**
 	 * SecurityHelper 日志变量;
 	 */
-	private final static Logger logger = LoggerFactory.getLogger(SecurityHelper.class);
+	private final static Logger logger = Logger.getLogger(SecurityHelper.class);
+
 
 
 	public static String md5Encode(String str) throws Exception {

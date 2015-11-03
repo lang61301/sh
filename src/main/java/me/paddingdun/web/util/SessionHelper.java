@@ -3,12 +3,12 @@
  */
 package me.paddingdun.web.util;
 
+import static me.paddingdun.web.util.IAppConstant.USER_SESSION_KEY;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import static me.paddingdun.web.util.IAppConstant.*;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 
 import me.paddingdun.web.login.LoginUser;
 
@@ -21,7 +21,8 @@ public class SessionHelper {
 	/**
 	 * SessionHelper 日志变量;
 	 */
-	private final static Logger logger = LoggerFactory.getLogger(SessionHelper.class);
+	private final static Logger logger = Logger.getLogger(SessionHelper.class);
+
 
 
 	public static LoginUser loginUser(HttpServletRequest request){

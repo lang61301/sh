@@ -11,13 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import me.paddingdun.service.user.IUserService;
 
 /**
+ * 已经废弃2015-11-02;
  * 未完成, 修改为spring Controller ;
  * 登录servlet;
  * 
@@ -35,7 +36,8 @@ public class LoginServlet extends HttpServlet {
 	/**
 	 * LoginServlet 日志变量;
 	 */
-	private final static Logger logger = LoggerFactory.getLogger(LoginServlet.class);
+	private final static Logger logger = Logger.getLogger(LoginServlet.class);
+
 
 	private String successUrl;
 
@@ -70,7 +72,7 @@ public class LoginServlet extends HttpServlet {
 				logger.debug(String.format("LoginServlet: web.xml => loginServlet => successUrl [%s] !", successUrl));
 			}
 		}else{
-			if(logger.isWarnEnabled()){
+			if(logger.isEnabledFor(Level.WARN)){
 				logger.warn("LoginServlet: web.xml => loginServlet => successUrl is empty!");
 			}
 		}

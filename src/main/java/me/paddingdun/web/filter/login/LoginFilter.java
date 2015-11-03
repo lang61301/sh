@@ -17,8 +17,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.log4j.Priority;
 
 import me.paddingdun.web.login.LoginUser;
 import me.paddingdun.web.util.SessionHelper;
@@ -34,7 +35,8 @@ public class LoginFilter implements Filter {
 	/**
 	 * LoginFilter 日志变量;
 	 */
-	private final static Logger logger = LoggerFactory.getLogger(LoginFilter.class);
+	private final static Logger logger = Logger.getLogger(LoginFilter.class);
+
 
 	
 	public static String loginUrl;
@@ -124,7 +126,7 @@ public class LoginFilter implements Filter {
 				logger.debug(String.format("LoginFilter: web.xml => loginFilter => loginUrl [%s] !", loginUrl));
 			}
 		}else{
-			if(logger.isWarnEnabled()){
+			if(logger.isEnabledFor(Level.WARN)){
 				logger.warn("LoginFilter: web.xml => loginFilter => loginUrl is empty!");
 			}
 		}
