@@ -7,4 +7,6 @@ jsp中使用:
 	<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 	使用:
 	<spring:message code="key" /> key可以替换为对应的键值:user.login.name
+java文件中使用:
+	MessageHolder.getMessage("user.login.head")
 	
