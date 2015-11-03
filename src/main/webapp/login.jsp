@@ -1,4 +1,5 @@
 <%@page contentType="text/html; charset=utf-8"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
@@ -6,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>login</title>
+    <title><spring:message code="app.title" /></title>
 
     <!-- 新 Bootstrap 核心 CSS 文件 -->
 	<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -66,17 +67,17 @@
 
       <form class="form-signin" action="login" method="post">
       	<input type="hidden" name="code" value="1145">
-        <h2 class="form-signin-heading">登录</h2>
-        <label for="inputEmail" class="sr-only">账号</label>
-        <input type="text" id="loginName" name="loginName" class="form-control" placeholder="账号" required autofocus>
-        <label for="inputPassword" class="sr-only">密码</label>
-        <input type="password" id="password" name="password" class="form-control" placeholder="密码" required>
+        <h2 class="form-signin-heading"><spring:message code="user.login.head" /></h2>
+        <label for="inputEmail" class="sr-only"><spring:message code="user.login.name" /></label>
+        <input type="text" id="loginName" name="loginName" class="form-control" placeholder="<spring:message code="user.login.name" />" required autofocus>
+        <label for="inputPassword" class="sr-only"><spring:message code="user.login.pwd" /></label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="<spring:message code="user.login.pwd" />" required>
         <div class="checkbox">
           <label>
-            <input type="checkbox" value="remember-me"> 记住我
+            <input type="checkbox" value="remember-me"> <spring:message code="user.login.remember" />
           </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit"><spring:message code="user.login.button" /></button>
       </form>
 
     </div> <!-- /container -->
