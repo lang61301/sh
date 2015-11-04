@@ -1,8 +1,5 @@
 package me.paddingdun.dao.impl;
 
-import java.util.List;
-import java.util.Map;
-
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

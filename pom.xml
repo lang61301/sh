@@ -125,7 +125,7 @@
 	     <groupId>org.springframework</groupId>
 	     <artifactId>spring-test</artifactId>
 	     <version>${spring.version}</version>
-	     <scope>provide</scope>
+	     <scope>provided</scope>
 	 </dependency>
 	 
 	 <!--aspectjweaver包, spring aop需要用到此包, spring4以后有单独的自己的包 -->
@@ -215,5 +215,21 @@
   </dependencies>
   <build>
     <finalName>ssh2</finalName>
+    
+    <plugins>
+	    <plugin>
+		    <artifactId>maven-clean-plugin</artifactId>
+		    <version>2.5</version>
+		    <configuration>
+		      <filesets>
+		        <fileset>
+		          <directory>src/main/webapp/WEB-INF/lib</directory>
+		          <!-- directory>src/main/webapp/WEB-INF/classes</directory-->
+		          <followSymlinks>false</followSymlinks>
+		        </fileset>
+		      </filesets>
+		    </configuration>
+		  </plugin>
+	  </plugins>
   </build>
 </project>
