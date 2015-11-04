@@ -2,8 +2,9 @@ package me.paddingdun.exception;
 
 /**
  * 异常管理;
- * @author admin
+ * @author paddingdun
  *
+ * 2015年11月2日
  */
 public class CommonException extends RuntimeException {
 	
@@ -13,7 +14,7 @@ public class CommonException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 	
 	/**
-	 * 9000:无法分类异常;
+	 * -9000:无法分类异常;
 	 */
 	private static final String ERROR_CODE_NOCLASS = "-9000"; 
 	

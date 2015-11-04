@@ -29,4 +29,6 @@ public interface IUserDao {
 	List<User> queryUser(@Param("user") User user, @Param("paging") Paging page);
 	
 	int getUserTotal(@Param("user") User user);
+	
+	User findUserByLoginName(String loginName);
 }

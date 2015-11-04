@@ -8,4 +8,8 @@ package me.paddingdun.web.util;
  */
 public interface IAppConstant {
 	
+	/**
+	 * 用户session, 标识类;
+	 */
+	String USER_SESSION_KEY = "me.paddingdun.session.user.key";
 }

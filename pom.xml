@@ -61,8 +61,7 @@
 		　　
 		(12) spring-webmvc.jar
 		　　
-		(13) spring-mock.jar
-　　		这个jar文件包含Spring一整套mock类来辅助应用的测试。Spring测试套件使用了其中大量mock类，这样测试就更加简单。模拟HttpServletRequest和HttpServletResponse类在Web应用单元测试是很方便的。
+		(13) spring-test.jar
      -->
      
     <!-- 这个jar文件包含Spring框架基本的核心工具类，Spring其它组件要都要使用到这个包里的类，是其它组件的基本核心，当然你也可以在自己的应用系统中使用这些工具类。 -->
@@ -119,6 +118,14 @@
 	     <groupId>org.springframework</groupId>
 	     <artifactId>spring-aop</artifactId>
 	     <version>${spring.version}</version>
+	 </dependency>
+	 
+	 <!-- 这个jar文件包含Spring一整套mock类来辅助应用的测试。Spring测试套件使用了其中大量mock类，这样测试就更加简单。模拟HttpServletRequest和HttpServletResponse类在Web应用单元测试是很方便的。 -->
+	 <dependency>
+	     <groupId>org.springframework</groupId>
+	     <artifactId>spring-test</artifactId>
+	     <version>${spring.version}</version>
+	     <scope>provide</scope>
 	 </dependency>
 	 
 	 <!--aspectjweaver包, spring aop需要用到此包, spring4以后有单独的自己的包 -->
@@ -188,8 +195,16 @@
 			<artifactId>gson</artifactId>
 			<version>2.2.2</version>
 		</dependency>
+		
+		<!-- 字符串处理 apache commons-lang 2.6 -->
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
   </dependencies>
   <build>
     <finalName>ssh2</finalName>
   </build>
 </project>
+

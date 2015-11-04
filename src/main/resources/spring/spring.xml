@@ -11,6 +11,17 @@
      <!-- 引入属性文件,config.properties位于src/main/resources目录下 -->
      <context:property-placeholder location="classpath:config.properties" />
  
-     <!-- 自动扫描dao和service包(自动注入) -->
-     <context:component-scan base-package="me.paddingdun.dao,me.paddingdun.service" />
+     <!-- 自动扫描service和组件包(自动注入) -->
+     <context:component-scan base-package="me.paddingdun.service,me.paddingdun.component" />
+     
+     <!-- 配置资源国际化 -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="basenames">
+			<array>
+				<value>i18n/message</value>
+			</array>
+		</property>
+	</bean>
 </beans>

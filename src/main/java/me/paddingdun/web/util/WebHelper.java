@@ -3,7 +3,10 @@ package me.paddingdun.web.util;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
 
 import com.google.gson.Gson;
 
@@ -15,6 +18,12 @@ import me.paddingdun.data.json.JsonResult;
  *
  */
 public class WebHelper {
+	
+	/**
+	 * WebHelper 日志变量;
+	 */
+	private final static Logger logger = Logger.getLogger(WebHelper.class);
+
 
 	/**
 	 * 返回ajax请求;
@@ -32,5 +41,45 @@ public class WebHelper {
 		
 		out.flush();
 		out.close();
+	}
+	
+	/**
+	 * 判断是否是ajax请求;
+	 * @param request
+	 * @return
+	 */
+	public static boolean isAjaxHttprequest(HttpServletRequest request){
+		boolean result = false;
+		if ("XMLHttpRequest"
+	            .equalsIgnoreCase(request
+	                    .getHeader("X-Requested-With"))) {//ajax请求;
+			result = true;
+		}
+		return result;
+	}
+	
+	/**
+	 * 获取访问ip地址;
+	 * @param request
+	 * @return
+	 */
+	public static String getIpAddr(HttpServletRequest request) {
+		String ip = request.getHeader("X-Forwarded-For");
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("Proxy-Client-IP");
+		}
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("WL-Proxy-Client-IP");
+		}
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("HTTP_CLIENT_IP");
+		}
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("HTTP_X_FORWARDED_FOR");
+		}
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getRemoteAddr();
+		}
+		return ip;
 	}
 }

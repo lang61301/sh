@@ -1,6 +1,8 @@
 package me.paddingdun.service.user.impl;
 
-import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,7 +42,9 @@ public class UserServiceImpl implements IUserService {
 		data.setPageSize(pag.getPageSize());
 		return data;
 	}
-
 	
-	
+	public User findUserByLoginName(String loginName) {
+		User user = userDao.findUserByLoginName(loginName);
+		return user;
+	}
 }

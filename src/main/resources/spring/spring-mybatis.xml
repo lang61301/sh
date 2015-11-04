@@ -124,4 +124,18 @@
          <aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice" />
      </aop:config>
      
+    <!-- start log, 实现log4j的appender,异步记录日志 -->
+    <!-- 已经通过注解实现AsynchronousMyBatisAppender -->
+    <!-- bean id="AsynchronousMyBatisAppender" class="me.paddingdun.component.log.log4j.appender.AsynchronousMyBatisAppender" init-method="initialize" destroy-method="shutdown">
+        <property name="transactionTemplate" ref="transactionTemplate" />
+        <property name="sysLogDao" ref="sysLogDao" />
+        <property name="loggingEventClass" value="me.paddingdun.data.SysLog"/>
+    </bean-->
+    
+    <bean id="transactionTemplate" class="org.springframework.transaction.support.TransactionTemplate"> 
+      <property name="transactionManager"> 
+        <ref bean="transactionManager"/> 
+      </property> 
+    </bean>
+    <!-- end log --> 
  </beans>

@@ -15,4 +15,6 @@ public interface IUserService {
 	void saveUser(User user);
 	
 	IDataCollection<User> queryUser(User user, Paging pag);
+	
+	User findUserByLoginName(String loginName);
 }

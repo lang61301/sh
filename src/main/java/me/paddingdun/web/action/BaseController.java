@@ -1,7 +1,6 @@
 package me.paddingdun.web.action;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -12,7 +11,11 @@ import org.springframework.web.servlet.ModelAndView;
  */
 public abstract class BaseController {
 	
-	private final static Logger logger = LoggerFactory.getLogger(BaseController.class);
+	/**
+	 * BaseController 日志变量;
+	 */
+	private final static Logger logger = Logger.getLogger(BaseController.class);
+
 	
 	/**
 	 * 全局异常处理;

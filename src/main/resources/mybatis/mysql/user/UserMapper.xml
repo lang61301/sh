@@ -3,56 +3,74 @@
 <mapper namespace="me.paddingdun.dao.user.IUserDao" >
   <!-- 用户返回map -->
   <resultMap id="UserMap" type="me.paddingdun.data.User" >
-    <id column="id" property="id"  />
-    <result column="name" property="name"/>
+    <id column="user_id" property="userId"  />
+    <result column="user_name" property="userName"/>
+    <result column="login_name" property="loginName"/>
+    <result column="password" property="password"/>
   </resultMap>
  
  <!-- 保存user -->
- <update id="saveUser" parameterType="me.paddingdun.data.User" useGeneratedKeys="true" keyProperty="id">
- 	insert into tb_user(name)
- 	values(#{name})
- </update>
+ <insert id="saveUser" parameterType="me.paddingdun.data.User" useGeneratedKeys="true" keyProperty="userId">
+ 	insert into tb_user(user_name, login_name, password)
+ 	values(#{userName}, #{loginName}, #{password})
+ </insert>
   
  <!-- 更新 user-->
  <update id="updateUser" parameterType="me.paddingdun.data.User">
  	update tb_user
- 	set name = #{name},
- 	where id = #{id}
+ 	set user_name = #{userName},
+ 	set login_name = #{loginName},
+ 	where id = #{userId}
  </update>
  <!-- 删除用户 -->
  <delete id="deleteUser" parameterType="java.lang.Long">
- 	delete from tb_user where id = #{0}
+ 	delete from tb_user where user_id = #{0}
  </delete>
   
-  <sql id="queryUserSql">
-  	select id, name
+  <!-- 获取user的sql语句,公共语句 -->
+  <sql id="getUserSql">
+  	select 	user_id, 
+  		   	user_name, 
+  		   	login_name, 
+  		   	password
 	FROM
 		tb_user 
-	<where>
-			1 = 1
-			<if test="user != null">
-				<if test="user.id != null">
-					and id = #{user.id}
-				</if>
-				<if test="user.name != null">
-					and name = #{user.name}
-				</if>
-			</if>
-	</where>
   </sql>
   
-  <select id="getUser" parameterType="me.paddingdun.data.User" resultMap="UserMap">
-  	<include refid="queryUserSql"/>
+  <!-- 查询用户列表语句 -->
+  <sql id="queryUserSql">
+  	<include refid="getUserSql"></include>
+  	<where>
+			1 = 1
+  	</where>
+  </sql>
+  
+  <!-- 获取单个用户方法 -->
+  <select id="getUser" parameterType="java.lang.Long" resultMap="UserMap">
+  	<include refid="getUserSql"/>
+  	<where>
+			user_id = #{0}
+	</where>
   </select>
   
+  <!-- 分页查询用户列表 -->
   <select id="queryUser" resultMap="UserMap">
   	<include refid="queryUserSql"/>
   	<include refid="common.paging"/>
   </select>
   
+  <!-- 分页时查询用户总数 -->
   <select id="getUserTotal" resultType="int">
   	select count(1) from (
   		<include refid="queryUserSql"/>
   	) t1
+  </select>
+  
+  <!-- 根据登录用户名获取用户对象 -->
+  <select id="findUserByLoginName" parameterType="java.lang.String" resultMap="UserMap">
+  	<include refid="getUserSql"/>
+  	<where>
+  			login_name = #{0}
+	</where>
   </select>
 </mapper>
