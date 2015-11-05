@@ -7,7 +7,7 @@ package me.paddingdun.component.factory;
 import org.apache.log4j.Logger;
 
 import me.paddingdun.component.MessageHolder;
-import me.paddingdun.exception.CommonException;
+import me.paddingdun.exception.BusinessException;
 
 /**
  * 异常工厂类;
@@ -30,11 +30,11 @@ public class CommonExceptionFactory {
 	 * @param message
 	 * @return
 	 */
-	public static CommonException createCommonException(String errorCode, String message){
+	public static BusinessException createCommonException(String errorCode, String message){
 		if (logger.isDebugEnabled()) {
 			logger.debug(String.format("CommonExceptionFactory.createCommonException:errorCode[%s], message[%s]", errorCode, message));
 		}
-		CommonException exception = new CommonException(errorCode, message);
+		BusinessException exception = new BusinessException(errorCode, message);
 		return exception;
 	}
 	
@@ -44,7 +44,7 @@ public class CommonExceptionFactory {
 	 * @param messageCode
 	 * @return
 	 */
-	public static CommonException createCommonException2(String errorCode, String messageCode){
+	public static BusinessException createCommonException2(String errorCode, String messageCode){
 		return createCommonException2(errorCode, messageCode, new Object[0]);
 	}
 	
@@ -55,7 +55,7 @@ public class CommonExceptionFactory {
 	 * @param obj
 	 * @return
 	 */
-	public static CommonException createCommonException2(String errorCode, String messageCode, Object[] obj){
+	public static BusinessException createCommonException2(String errorCode, String messageCode, Object[] obj){
 		if (logger.isDebugEnabled()) {
 			logger.debug(String.format("CommonExceptionFactory.createCommonException2:errorCode[%s], messgeCode[%s]", errorCode, messageCode));
 		}

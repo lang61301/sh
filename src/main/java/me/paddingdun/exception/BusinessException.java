@@ -1,12 +1,12 @@
 package me.paddingdun.exception;
 
 /**
- * 异常管理;
+ * 业务异常, 用来提供给用户友好的提示;
  * @author paddingdun
  *
  * 2015年11月2日
  */
-public class CommonException extends RuntimeException {
+public class BusinessException extends RuntimeException {
 	
 	/**
 	 * 
@@ -28,23 +28,23 @@ public class CommonException extends RuntimeException {
 	 */
 	private Object attachment;
 	
-	public CommonException(String message){
+	public BusinessException(String message){
 		this(ERROR_CODE_NOCLASS, message);
 	}
 	
-	public CommonException(String message, Object attachment){
+	public BusinessException(String message, Object attachment){
 		this(ERROR_CODE_NOCLASS, message, null, attachment);
 	}
 	
-	public CommonException(String errorCode, String message){
+	public BusinessException(String errorCode, String message){
 		this(errorCode, message, null, null);
 	}
 	
-	public CommonException(String errorCode, String message, Object attachment){
+	public BusinessException(String errorCode, String message, Object attachment){
 		this(errorCode, message, null, attachment);
 	}
 	
-	public CommonException(String errorCode, String message, Throwable cause, Object attachment){
+	public BusinessException(String errorCode, String message, Throwable cause, Object attachment){
 		super(message, cause);
 		this.errorCode = errorCode;
 		this.attachment = attachment;
@@ -67,7 +67,7 @@ public class CommonException extends RuntimeException {
 	}
 	
 	public static void main(String[] args) {
-		CommonException ce = new CommonException("错误");
+		BusinessException ce = new BusinessException("错误");
 		
 		System.out.println(ce instanceof Throwable);
 	}

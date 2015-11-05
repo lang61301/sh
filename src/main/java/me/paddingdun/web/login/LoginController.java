@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import me.paddingdun.component.LogHolder;
 import me.paddingdun.data.User;
-import me.paddingdun.exception.CommonException;
+import me.paddingdun.exception.BusinessException;
 import me.paddingdun.exception.IException;
 import me.paddingdun.service.user.IUserService;
 import me.paddingdun.util.SecurityHelper;
@@ -58,15 +58,15 @@ public class LoginController extends BaseController {
 						HttpServletResponse response){
 		if(StringUtils.isBlank(loginName)){
 			LogHolder.saveFailOpLog(String.format("[%s][%s] login fail, 用户为空!", loginName, WebHelper.getIpAddr(request)));
-			throw new CommonException(IException.LOGIN_USER_EMPTY, "用户为空");
+			throw new BusinessException(IException.LOGIN_USER_EMPTY, "用户为空");
 		}
 		if(StringUtils.isBlank(password)){
 			LogHolder.saveFailOpLog(String.format("[%s][%s] login fail, 密码为空!", loginName, WebHelper.getIpAddr(request)));
-			throw new CommonException(IException.LOGIN_PASSWORD_EMPTY, "密码为空");
+			throw new BusinessException(IException.LOGIN_PASSWORD_EMPTY, "密码为空");
 		}
 		if(StringUtils.isBlank(code)){
 			LogHolder.saveFailOpLog(String.format("[%s][%s] login fail, 验证码为空!", loginName, WebHelper.getIpAddr(request)));
-			throw new CommonException(IException.LOGIN_CODE_EMPTY, "验证码为空");
+			throw new BusinessException(IException.LOGIN_CODE_EMPTY, "验证码为空");
 		}
 		
 		String loginName1 = loginName.trim();
@@ -74,14 +74,14 @@ public class LoginController extends BaseController {
 		User user = userService.findUserByLoginName(loginName1);
 		if(user == null){
 			LogHolder.saveFailOpLog(String.format("[%s][%s] login fail, 用户不存在!", loginName1, WebHelper.getIpAddr(request)));
-			throw new CommonException(IException.LOGIN_USER_NOT_EXIST, "用户不存在");
+			throw new BusinessException(IException.LOGIN_USER_NOT_EXIST, "用户不存在");
 		}else{
 			String pwd = "";
 			try {
 				pwd = SecurityHelper.md5Encode(password.trim()).toUpperCase();
 			} catch (Exception e) {
 				LogHolder.saveFailOpLog(String.format("[%s][%s] login fail, 服务器错误!", loginName1, WebHelper.getIpAddr(request)));
-				throw new CommonException(IException.LOGIN_UNKNOW, "服务器错误", e, null);
+				throw new BusinessException(IException.LOGIN_UNKNOW, "服务器错误", e, null);
 			}
 			if(pwd.equals(user.getPassword())){
 				LoginUser loginUser = new LoginUser(user);
@@ -94,7 +94,7 @@ public class LoginController extends BaseController {
 				}
 			}else{
 				LogHolder.saveFailOpLog(String.format("[%s][%s] login fail, 密码错误!", loginName1, WebHelper.getIpAddr(request)));
-				throw new CommonException(IException.LOGIN_PASSWORD_ERROR, "密码错误");
+				throw new BusinessException(IException.LOGIN_PASSWORD_ERROR, "密码错误");
 			}
 		}
 		

@@ -1,0 +1,5 @@
+构建工程小技巧
+mvn dependency:copy-dependencies -DoutputDirectory=lib   -DincludeScope=compile
+该maven插件可以复制工程依赖的所有jar包到指定目录;
+-DoutputDirectory输出目录;
+-DincludeScope 复制哪些jar包, 同<dependency>中的<scope>
