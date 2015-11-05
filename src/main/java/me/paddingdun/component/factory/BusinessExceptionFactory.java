@@ -15,12 +15,12 @@ import me.paddingdun.exception.BusinessException;
  *
  * 2015年11月3日
  */
-public class CommonExceptionFactory {
+public class BusinessExceptionFactory {
 	
 	/**
 	 * CommonExceptionFactory 日志变量;
 	 */
-	private final static Logger logger = Logger.getLogger(CommonExceptionFactory.class);
+	private final static Logger logger = Logger.getLogger(BusinessExceptionFactory.class);
 
 
 	
