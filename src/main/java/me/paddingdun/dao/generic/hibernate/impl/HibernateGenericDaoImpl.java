@@ -114,7 +114,8 @@ public abstract class HibernateGenericDaoImpl extends HibernateTemplate implemen
         
         Dialect dialect = ((SessionImpl)this.getSession()).getFactory().getDialect();
         String dbType = dialect.getClass ().getName ().toLowerCase ();
-        if (dbType.contains ("postgres")) {
+        if (dbType.contains ("postgres")
+        		|| dbType.contains("mysql")) {
             count_sql += " as _count";
         }
 
