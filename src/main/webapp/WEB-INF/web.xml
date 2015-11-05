@@ -34,7 +34,7 @@
 	  <!-- 不验证是否登录url, 用","分割 -->
 	  <init-param>
 	   <param-name>excludeUrl</param-name>
-	   <param-value>/login.jsp,/login,/logout</param-value>
+	   <param-value>/login.jsp,/login,/logout,/static/**</param-value>
 	  </init-param>
 	 </filter>
 	 <filter-mapping>
@@ -91,4 +91,22 @@
 	  <servlet-name>loginServlet</servlet-name>
 	  <url-pattern>/login</url-pattern>
 	 </servlet-mapping-->
+	
+	<!-- 错误页面映射 -->
+	<error-page>  
+        <error-code>403</error-code>  
+        <location>/WEB-INF/views/error/403.jsp</location>  
+    </error-page>  
+    <error-page>  
+        <error-code>404</error-code>  
+        <location>/WEB-INF/views/error/404.jsp</location>  
+    </error-page>  
+    <error-page>  
+        <error-code>405</error-code>  
+        <location>/WEB-INF/views/error/405.jsp</location>  
+    </error-page>  
+    <error-page>  
+        <error-code>500</error-code>  
+        <location>/WEB-INF/views/error/500.jsp</location>  
+    </error-page>  
 </web-app>
