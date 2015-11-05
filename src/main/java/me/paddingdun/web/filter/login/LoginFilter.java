@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.apache.log4j.Priority;
 
 import me.paddingdun.web.login.LoginUser;
 import me.paddingdun.web.util.SessionHelper;
@@ -40,6 +39,12 @@ public class LoginFilter implements Filter {
 
 	
 	public static String loginUrl;
+	
+	/**
+	 * 如果以"**"结尾表示以该路径开头的所有访问路径;
+	 * 否则表示精确匹配;
+	 * eg: /login,/static/**
+	 */
 	private Set<String> excludeUrl;
 
 	/* (non-Javadoc)
@@ -65,12 +70,25 @@ public class LoginFilter implements Filter {
 		}
 		if(!excludeUrl.isEmpty()){
 			for(String eu : excludeUrl){
-				if(reqURI.equals(contextPath + eu)){
-					if (logger.isDebugEnabled()) {
-						logger.debug("LoginFilter: the url in exclude url: " + (contextPath + eu));
+				//开头匹配;
+				if(eu.endsWith("**")){
+					String tmp_eu = eu.substring(0, eu.length() - 2);
+					if(reqURI.startsWith(contextPath + tmp_eu)){
+						if (logger.isDebugEnabled()) {
+							logger.debug("LoginFilter: the url in exclude url: " + (contextPath + tmp_eu));
+						}
+						chain.doFilter(r, p);
+						return;
 					}
-					chain.doFilter(r, p);
-					return;
+				//精确匹配;
+				}else{
+					if(reqURI.equals(contextPath + eu)){
+						if (logger.isDebugEnabled()) {
+							logger.debug("LoginFilter: the url in exclude url: " + (contextPath + eu));
+						}
+						chain.doFilter(r, p);
+						return;
+					}
 				}
 			}
 		}
