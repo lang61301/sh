@@ -3,22 +3,28 @@
  */
 package me.paddingdun.web.login;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.google.code.kaptcha.Constants;
 
 import me.paddingdun.component.LogHolder;
 import me.paddingdun.data.User;
 import me.paddingdun.exception.BusinessException;
 import me.paddingdun.exception.IException;
 import me.paddingdun.service.user.IUserService;
+import me.paddingdun.util.DateHelper;
 import me.paddingdun.util.SecurityHelper;
 import me.paddingdun.web.action.BaseController;
 import me.paddingdun.web.util.IAppConstant;
@@ -43,6 +49,12 @@ public class LoginController extends BaseController {
 	@Autowired
 	private IUserService userService;
 	
+	@Value("${captcha.enable:false}")
+	private boolean captchaEnable;
+	
+	@Value("${captcha.timeout:30}")
+	private Integer captchaTimeout;
+	
 	/**
 	 * 用户名, 密码, 验证码
 	 * @param username
@@ -56,6 +68,38 @@ public class LoginController extends BaseController {
 						@RequestParam("code")String code,
 						HttpServletRequest request,
 						HttpServletResponse response){
+		if (logger.isDebugEnabled()) {
+			logger.debug(String.format("LoginController.login:captcha.enable[%s], captcha.timeout[%s]", captchaEnable, captchaTimeout));
+		}
+		//如果支持验证码操作
+		if(captchaEnable){
+			
+			if(StringUtils.isBlank(code)){
+				LogHolder.saveFailOpLog(String.format("[%s][%s] login fail, 验证码为空!", loginName, WebHelper.getIpAddr(request)));
+				throw new BusinessException(IException.LOGIN_CODE_EMPTY, "验证码为空");
+			}
+			
+			Date codeGenTime = 	(Date)SessionHelper.attr(request.getSession(), Constants.KAPTCHA_SESSION_DATE);
+			
+			if(codeGenTime == null){
+				LogHolder.saveFailOpLog(String.format("[%s][%s] login fail, 未生成验证码!", loginName, WebHelper.getIpAddr(request)));
+				throw new BusinessException(IException.LOGIN_CODE_UNGEN, "未生成验证码");
+			}
+			
+			Date now = DateHelper.now();
+			if(now.getTime() > (codeGenTime.getTime() + captchaTimeout * 1000) ){
+				LogHolder.saveFailOpLog(String.format("[%s][%s] login fail, 验证码超时!", loginName, WebHelper.getIpAddr(request)));
+				throw new BusinessException(IException.LOGIN_CODE_TIMEOUT, "验证码超时");
+			}
+			
+			String codeGen = 	(String)SessionHelper.attr(request.getSession(), Constants.KAPTCHA_SESSION_KEY);
+			code = code.trim();
+			if(!code.equalsIgnoreCase(codeGen)){
+				LogHolder.saveFailOpLog(String.format("[%s][%s] login fail, 验证码错误!", loginName, WebHelper.getIpAddr(request)));
+				throw new BusinessException(IException.LOGIN_CODE_ERROR, "验证码错误");
+			}
+		}
+		
 		if(StringUtils.isBlank(loginName)){
 			LogHolder.saveFailOpLog(String.format("[%s][%s] login fail, 用户为空!", loginName, WebHelper.getIpAddr(request)));
 			throw new BusinessException(IException.LOGIN_USER_EMPTY, "用户为空");

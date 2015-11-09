@@ -82,4 +82,15 @@ public class WebHelper {
 		}
 		return ip;
 	}
+	
+	/**
+	 * 设置response为无缓存;
+	 * @param response
+	 * @throws IOException
+	 */
+	public static void setNoCacheHeader(HttpServletResponse response)throws IOException{
+		response.setDateHeader("Expires", 0);
+	    response.addHeader("Pragma", "no-cache");
+	    response.setHeader("Cache-Control", "no-cache, no-store, max-age=0");
+	}
 }

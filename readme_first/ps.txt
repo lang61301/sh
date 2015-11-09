@@ -151,3 +151,6 @@ class="org.springframework.web.servlet.mvc.annotation.ResponseStatusExceptionRes
 class="org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver">  
 <property name="order" value="2" />  
 </bean>  
+
+2.本地安装google验证码maven仓库
+mvn install:install-file -Dfile=${本地jar包位置}\kaptcha-2.3.2.jar -DgroupId=com.google.code  -DartifactId=kaptcha -Dversion=2.3.2 -Dpackaging=jar

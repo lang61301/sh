@@ -18,5 +18,6 @@ public interface IException {
 	String LOGIN_CODE_EMPTY			= "1004";
 	String LOGIN_CODE_TIMEOUT		= "1005";
 	String LOGIN_CODE_ERROR			= "1006";
+	String LOGIN_CODE_UNGEN			= "1007";
 	String LOGIN_UNKNOW				= "1099";
 }

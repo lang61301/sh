@@ -76,12 +76,18 @@
     <div class="container">
 
       <form class="form-signin" action="login" method="post">
-      	<input type="hidden" name="code" value="1145">
         <h2 class="form-signin-heading"><spring:message code="user.login.head" /></h2>
-        <label for="inputEmail" class="sr-only"><spring:message code="user.login.name" /></label>
+        <label for="loginName" class="sr-only"><spring:message code="user.login.name" /></label>
         <input type="text" id="loginName" name="loginName" class="form-control" placeholder="<spring:message code="user.login.name" />" required autofocus>
-        <label for="inputPassword" class="sr-only"><spring:message code="user.login.pwd" /></label>
+        <label for="password" class="sr-only"><spring:message code="user.login.pwd" /></label>
         <input type="password" id="password" name="password" class="form-control" placeholder="<spring:message code="user.login.pwd" />" required>
+        <div class="form-group col-md-6">
+        	<label for="code" class="sr-only"><spring:message code="user.login.captcha" /></label>
+        	<input type="text" id="code" name="code" class="form-control" placeholder="<spring:message code="user.login.captcha" />" required>
+        </div>
+        <div class="form-group col-md-6">
+        	<img id="genCode" title="点击刷新验证码">
+        </div>
         <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> <spring:message code="user.login.remember" />
@@ -104,7 +110,11 @@
 <script type="text/javascript" src="static/js/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	
+	$("#genCode").on("click", function(){
+		$(this).attr("src", "captcha?_r=" + (new Date().getTime()));
+		$('#code').val('').focus();
+	});
+	$("#genCode").trigger("click");
 });
 </script>
 </body>

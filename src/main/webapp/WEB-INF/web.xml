@@ -3,6 +3,14 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 <web-app>
   <display-name>ssh2</display-name>
+  	<!-- Spring配置文件位置 -->
+	  <context-param>
+		  <param-name>contextConfigLocation</param-name>
+		  	<param-value>
+				classpath:/spring/spring.xml
+			</param-value>
+	  </context-param>
+ 
   	<!-- Spring启动监听器 -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -15,13 +23,6 @@
      <listener>
          <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
      </listener>
-	<!-- Spring配置文件位置 -->
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:/spring/spring.xml,
-				     classpath:/spring/spring-hibernate.xml
-		</param-value>
-	</context-param>
 	
 	<!-- 登录过滤器 -->
 	<filter>
@@ -34,7 +35,7 @@
 	  <!-- 不验证是否登录url, 用","分割 -->
 	  <init-param>
 	   <param-name>excludeUrl</param-name>
-	   <param-value>/login.jsp,/login,/logout,/static/**</param-value>
+	   <param-value>/login.jsp,/login,/logout,/static/**,/captcha</param-value>
 	  </init-param>
 	 </filter>
 	 <filter-mapping>
