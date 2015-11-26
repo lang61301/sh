@@ -16,12 +16,12 @@ public class BusinessException extends RuntimeException {
 	/**
 	 * -9000:无法分类异常;
 	 */
-	private static final String ERROR_CODE_NOCLASS = "-9000"; 
+	private static final Integer ERROR_CODE_NOCLASS = -9000; 
 	
 	/**
 	 * 异常编号;
 	 */
-	private String errorCode;
+	private Integer errorCode;
 	
 	/**
 	 * 附加信息,可以null;
@@ -36,25 +36,25 @@ public class BusinessException extends RuntimeException {
 		this(ERROR_CODE_NOCLASS, message, null, attachment);
 	}
 	
-	public BusinessException(String errorCode, String message){
+	public BusinessException(Integer errorCode, String message){
 		this(errorCode, message, null, null);
 	}
 	
-	public BusinessException(String errorCode, String message, Object attachment){
+	public BusinessException(Integer errorCode, String message, Object attachment){
 		this(errorCode, message, null, attachment);
 	}
 	
-	public BusinessException(String errorCode, String message, Throwable cause, Object attachment){
+	public BusinessException(Integer errorCode, String message, Throwable cause, Object attachment){
 		super(message, cause);
 		this.errorCode = errorCode;
 		this.attachment = attachment;
 	}
 
-	public String getErrorCode() {
+	public Integer getErrorCode() {
 		return errorCode;
 	}
 
-	public void setErrorCode(String errorCode) {
+	public void setErrorCode(Integer errorCode) {
 		this.errorCode = errorCode;
 	}
 
