@@ -32,7 +32,7 @@ public class WebHelper {
 	 * @param jr
 	 * @throws IOException
 	 */
-	public static void rtnAjax(HttpServletResponse response, Gson gson, JsonResult jr)throws IOException{
+	public static<T> void rtnAjax(HttpServletResponse response, Gson gson, JsonResult<T> jr)throws IOException{
 		response.reset();
 		response.setContentType("application/json;charset=UTF-8");
 		PrintWriter out = response.getWriter();

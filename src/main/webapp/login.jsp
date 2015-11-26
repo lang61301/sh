@@ -86,9 +86,7 @@
         	<label for="code" class="sr-only"><spring:message code="user.login.captcha" /></label>
         	<input type="text" id="code" name="code" class="form-control" placeholder="<spring:message code="user.login.captcha" />" required>
         </div>
-        <div class="form-group col-md-6">
         	<img id="genCode" title="点击刷新验证码">
-        </div>
         <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> <spring:message code="user.login.remember" />
