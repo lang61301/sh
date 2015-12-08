@@ -1,5 +1,8 @@
 构建工程小技巧
-mvn dependency:copy-dependencies -DoutputDirectory=lib   -DincludeScope=compile
+1.mvn dependency:copy-dependencies -DoutputDirectory=lib   -DincludeScope=compile
 该maven插件可以复制工程依赖的所有jar包到指定目录;
 -DoutputDirectory输出目录;
 -DincludeScope 复制哪些jar包, 同<dependency>中的<scope>
+
+2.mvn安装本地jar包
+mvn install:install-file -DgroupId=com.mxgraph -DartifactId=jgraphx -Dversion=3.4.0.3 -Dpackaging=jar -Dfile=D:\home\tmp\jgraphx-3_4_0_3\jgraphx\lib\jgraphx.jar
