@@ -11,7 +11,7 @@
     <title><spring:message code="app.title" /></title>
 
     <!-- 新 Bootstrap 核心 CSS 文件 -->
-	<link rel="stylesheet" href="static/js/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="static/js/bootstrap/3.3/css/bootstrap.min.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -104,9 +104,9 @@
       </div>
     </footer>
 <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-<script type="text/javascript" src="static/js/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="static/js/jquery/1.11/jquery.min.js"></script>
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script type="text/javascript" src="static/js/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="static/js/bootstrap/3.3/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#genCode").on("click", function(){
