@@ -8,10 +8,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
@@ -240,18 +242,67 @@ public class ExcelHelper {
 	 * @throws Exception
 	 */
 	public static void downLoadExcel(String filePath, HttpServletResponse response) throws Exception {
+		downLoadExcel(filePath, null, response, null);
+	} 
+	
+	/**
+	 * 生成指定的文件名称的excel下载;
+	 * @param filePath
+	 * @param response
+	 * @param fileName
+	 * @throws Exception
+	 */
+	public static void downLoadExcel(String filePath, HttpServletRequest request, HttpServletResponse response, String fileName) throws Exception {
 		BufferedInputStream bis  = null;
 		OutputStream 		out  = null;
 		File 				file = null;
 		try{
 			file = new File(filePath);
+			if(StringUtils.isBlank(fileName)){
+		    	fileName = file.getName();
+		    }
+			String rtn = "filename=\"" + new String(fileName.getBytes("utf-8"),"iso-8859-1")+"\"";
+		    if(request == null){
+		    }else{
+		    	String userAgent = request.getHeader("User-Agent");
+		    	if (userAgent != null)  
+		    	{  
+		    		String new_filename = URLEncoder.encode(fileName, "utf-8");
+		    		userAgent = userAgent.toLowerCase();  
+		    		// IE浏览器，只能采用URLEncoder编码  
+		    		if (userAgent.indexOf("msie") != -1)  
+		    		{  
+		    			rtn = "filename=\"" + new_filename + "\"";  
+		    		}  
+		    		// Opera浏览器只能采用filename*  
+		    		else if (userAgent.indexOf("opera") != -1)  
+		    		{  
+		    			rtn = "filename*=UTF-8''" + new_filename;  
+		    		}  
+		    		// Safari浏览器，只能采用ISO编码的中文输出  
+		    		else if (userAgent.indexOf("safari") != -1 )  
+		    		{  
+		    		}  
+		    		// Chrome浏览器，只能采用MimeUtility编码或ISO编码的中文输出  
+		    		else if (userAgent.indexOf("applewebkit") != -1 )  
+		    		{  
+		    			rtn = "filename=\"" + new_filename + "\"";  
+		    		}  
+		    		// FireFox浏览器，可以使用MimeUtility或filename*或ISO编码的中文输出  
+		    		else if (userAgent.indexOf("mozilla") != -1)  
+		    		{  
+		    			rtn = "filename*=UTF-8''" + new_filename;  
+		    		}  
+		    	}  
+		    }
+		    
 			bis =  new BufferedInputStream(new FileInputStream(file));  
 			byte[] buf = new byte[1024];  
 			int len = 0;
 
 			response.reset(); 
 			response.setContentType("application/x-msdownload");
-			response.setHeader("Content-Disposition", "attachment; filename=" +new String(file.getName().getBytes(), "ISO-8859-1"));  
+			response.setHeader("Content-Disposition", "attachment; " + rtn);  
 			out = response.getOutputStream();  
 			while ((len = bis.read(buf)) > 0){  
 				out.write(buf, 0, len);
