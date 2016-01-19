@@ -9,7 +9,7 @@ if(!!!(me.pdd.Util))me.pdd.Util ={
 	 */
 	"plainfy_datatables":function(data){
 		for (var i = 0; i < data.columns.length; i++) {
-	        column = data.columns[i];
+	        var column = data.columns[i];
 	        column.searchRegex = column.search.regex;
 	        column.searchValue = column.search.value;
 	        delete(column.search);
