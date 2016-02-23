@@ -28,7 +28,22 @@
 
 	
 	<!-- 具体进行了什么spring配置,参见:/readme_first/ps.txt-->
-	<mvc:annotation-driven />
+	<mvc:annotation-driven conversion-service="conversionService">
+	  <mvc:message-converters>  
+		        <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">  
+		            <property name="objectMapper" ref="customObjectMapper"></property>  
+		        </bean>  
+		 </mvc:message-converters>
+	</mvc:annotation-driven>
+  
+  <bean id="conversionService"
+            class="org.springframework.context.support.ConversionServiceFactoryBean">
+       <property name="converters">
+           <list>
+               <ref bean="timestampConverter"/>
+           </list>
+       </property>
+   </bean>
 	
 	<!-- 如果使用了mvc:default-servlet-handler, 一定要使用mvc:annotation-driven, 否则会找不到annotation配置的controller的requestmapping -->
 	<!-- 未配置requestmapping 的默认处理器,或者是静态资源, 默认配置"/**" 在SimpleUrlHandlerMapping -->

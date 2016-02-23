@@ -253,6 +253,13 @@
 	      <artifactId>poi-ooxml</artifactId>
 	      <version>3.9</version>
 	    </dependency>
+	    
+	    <!-- spring mvc 处理json转换 -->
+	    <dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
 		
   </dependencies>
   <build>
