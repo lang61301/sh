@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.google.gson.Gson;
@@ -92,5 +93,21 @@ public class WebHelper {
 		response.setDateHeader("Expires", 0);
 	    response.addHeader("Pragma", "no-cache");
 	    response.setHeader("Cache-Control", "no-cache, no-store, max-age=0");
+	}
+	
+	/**
+	 * 判断是否是http或https开始的url;
+	 * @param url
+	 * @return
+	 */
+	public static boolean isHttpURL(String url){
+		if(StringUtils.isNotBlank(url)){
+			String tmp = url.trim().toLowerCase();
+			if(tmp.startsWith("http://")
+					|| tmp.startsWith("https://")){
+				return true;
+			}
+		}
+		return false;
 	}
 }

@@ -6,6 +6,7 @@ package me.paddingdun.web.filter.login;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Matcher;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -22,6 +23,7 @@ import org.apache.log4j.Logger;
 
 import me.paddingdun.web.login.LoginUser;
 import me.paddingdun.web.util.SessionHelper;
+import me.paddingdun.web.util.WebHelper;
 
 /**
  * 用户登录filter
@@ -64,6 +66,8 @@ public class LoginFilter implements Filter {
 		HttpServletRequest request = (HttpServletRequest)r;
 		HttpServletResponse response = (HttpServletResponse)p;
 		String reqURI = request.getRequestURI();
+		//将多余的/替换成1个/;
+		reqURI = reqURI.replaceAll("/+", Matcher.quoteReplacement("/"));
 		String contextPath = request.getContextPath();
 		if (logger.isDebugEnabled()) {
 			logger.debug("LoginFilter: access url: " + reqURI);
@@ -135,8 +139,11 @@ public class LoginFilter implements Filter {
 		 */
 		if(StringUtils.isNotBlank(lu_init_param)){
 			String lu = lu_init_param.trim();
-			if(!lu.startsWith("/")){
-				lu = "/" + lu;
+			if(WebHelper.isHttpURL(lu)){
+			}else{
+				if(!lu.startsWith("/")){
+					lu = "/" + lu;
+				}
 			}
 			loginUrl = lu;
 			
