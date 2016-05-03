@@ -23,6 +23,7 @@ public class WebHelper {
 	/**
 	 * WebHelper 日志变量;
 	 */
+	@SuppressWarnings("unused")
 	private final static Logger logger = Logger.getLogger(WebHelper.class);
 
 
