@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import me.paddingdun.data.User;
-import me.paddingdun.data.json.JsonResult;
+import me.paddingdun.data.json.JsonResult2;
 import me.paddingdun.data.paging.IDataCollection;
 import me.paddingdun.data.paging.Paging;
 import me.paddingdun.service.user.IUserService;
@@ -50,7 +50,7 @@ public class UserController extends BaseController{
 	public void list(User user, Paging pag, HttpServletRequest request, HttpServletResponse response)throws Exception{
 		IDataCollection<User> data = userService.queryUser(user, pag);
 		
-		JsonResult jr = new JsonResult();
+		JsonResult2 jr = new JsonResult2();
 		jr.setData(data);
 		WebHelper.rtnAjax(response, GsonHelper.gson(), jr); 
 		

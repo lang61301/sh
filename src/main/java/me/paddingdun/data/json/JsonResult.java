@@ -8,27 +8,25 @@ import java.io.Serializable;
  *
  * 2015年10月28日
  */
-public class JsonResult implements Serializable {
+public class JsonResult<T> implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private boolean success = true;
+	private Integer status;
 	
 	private String message;
 	
-	private String errorCode;
-	
-	private Object data;
+	private T data;
 
-	public boolean isSuccess() {
-		return success;
+	public Integer getStatus() {
+		return status;
 	}
 
-	public void setSuccess(boolean success) {
-		this.success = success;
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
 	public String getMessage() {
@@ -39,19 +37,11 @@ public class JsonResult implements Serializable {
 		this.message = message;
 	}
 
-	public String getErrorCode() {
-		return errorCode;
-	}
-
-	public void setErrorCode(String errorCode) {
-		this.errorCode = errorCode;
-	}
-
-	public Object getData() {
+	public T getData() {
 		return data;
 	}
 
-	public void setData(Object data) {
+	public void setData(T data) {
 		this.data = data;
 	}
 }
