@@ -50,6 +50,7 @@ public class LoginCtrl extends BaseCtrl {
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String main(){
+		if(2>1)throw new BusinessException("sssssssssssssss");
 		return "main";
 	}
 

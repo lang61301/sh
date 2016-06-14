@@ -1,4 +1,4 @@
-<%@page contentType="text/html; charset=utf-8"%>
+<%@page contentType="text/html; charset=utf-8"  isErrorPage="true" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib tagdir="/WEB-INF/tags" prefix="cus" %>
 <!DOCTYPE html>
