@@ -46,3 +46,5 @@ Temporary Items
 .project
 .settings/*
 target/*
+pom2.xml
+
