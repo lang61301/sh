@@ -75,7 +75,7 @@
   <body>
     <div class="container">
 
-      <form class="form-signin" action="login" method="post">
+      <form class="form-signin" action="login.jsp" method="post">
       	<input type="hidden" name="code" value="1145">
         <h2 class="form-signin-heading"><spring:message code="user.login.head" /></h2>
         <label for="inputEmail" class="sr-only"><spring:message code="user.login.name" /></label>

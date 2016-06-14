@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 
@@ -19,6 +18,7 @@ import me.paddingdun.web.util.WebHelper;
  *
  * 2015年11月5日
  */
+@SuppressWarnings("unused")
 public class CustomSimpleMappingExceptionResolver extends SimpleMappingExceptionResolver {
 
 	/**

@@ -21,6 +21,7 @@ import org.springframework.web.servlet.support.RequestContextUtils;
  */
 @Component
 @Lazy(false)
+@SuppressWarnings("unused")
 public class MessageHolder {
 	
 	/**

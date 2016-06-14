@@ -7,9 +7,9 @@
  http://www.springframework.org/schema/context 
  http://www.springframework.org/schema/context/spring-context-3.0.xsd
  ">
- 
      <!-- 引入属性文件,config.properties位于src/main/resources目录下 -->
-     <context:property-placeholder location="classpath:config.properties" />
+     <context:property-placeholder location="classpath:config.properties,
+     										 classpath:datasource.properties"/>
  
      <!-- 自动扫描service和组件包(自动注入) -->
      <context:component-scan base-package="me.paddingdun.service,me.paddingdun.component" />
@@ -24,4 +24,6 @@
 			</array>
 		</property>
 	</bean>
+	
+	<import resource="spring-mybatis.xml"/>
 </beans>

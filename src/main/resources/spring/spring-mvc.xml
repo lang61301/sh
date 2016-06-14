@@ -10,9 +10,14 @@
  http://www.springframework.org/schema/mvc 
  http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
  ">
+ 	<!-- 由于 spirng-mvc是对应一个servlet所以,无法引用到spring中的配置属性,所以必须重新引入
+			属性文件,config.properties位于src/main/resources目录下 -->
+     <context:property-placeholder location="classpath:config.properties"/>
+     
 	<!-- 自动扫描mvc Controller -->
-	<context:component-scan base-package="me.paddingdun.web.action,me.paddingdun.web.login" >
+	<context:component-scan base-package="me.paddingdun.web.action,me.paddingdun.web.login,me.paddingdun.ext.spring" >
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Component"/>
 	</context:component-scan>
  
  	<!-- jsp文件位置 -->
@@ -24,23 +29,60 @@
 
 	
 	<!-- 具体进行了什么spring配置,参见:/readme_first/ps.txt-->
-	<mvc:annotation-driven />
+	<mvc:annotation-driven conversion-service="conversionService">
+	  <mvc:message-converters>  
+		        <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">  
+		            <property name="objectMapper" ref="customObjectMapper"></property>  
+		        </bean>  
+		 </mvc:message-converters>
+	</mvc:annotation-driven>
+  
+  <bean id="conversionService"
+            class="org.springframework.context.support.ConversionServiceFactoryBean">
+       <property name="converters">
+           <list>
+               <ref bean="timestampConverter"/>
+           </list>
+       </property>
+   </bean>
 	
 	<!-- 如果使用了mvc:default-servlet-handler, 一定要使用mvc:annotation-driven, 否则会找不到annotation配置的controller的requestmapping -->
 	<!-- 未配置requestmapping 的默认处理器,或者是静态资源, 默认配置"/**" 在SimpleUrlHandlerMapping -->
-	<!-- mvc:default-servlet-handler /-->
+	<mvc:default-servlet-handler />
 	
 	<!-- 静态资源另一种处理方式 -->
-	<mvc:resources mapping="/static/**" location="/static/" />  
+<!-- 	<mvc:resources mapping="/static/**" location="/static/1" />   -->
 
+	<!-- 已经通过注释实现 -->
 	<!-- 将Controller抛出的异常转到特定View -->
-	<bean
-		class="me.paddingdun.component.exception.CustomSimpleMappingExceptionResolver">
-		<property name="exceptionMappings">
-			<props>
-				<prop key="me.paddingdun.exception.BusinessException">error/errorpage</prop>
-				<prop key="java.lang.Throwable">error/500</prop>
-			</props>
+<!-- 	<bean -->
+<!-- 		class="me.paddingdun.component.exception.CustomSimpleMappingExceptionResolver"> -->
+<!-- 		<property name="exceptionMappings"> -->
+<!-- 			<props> -->
+<!-- 				<prop key="me.paddingdun.exception.BusinessException">error/errorpage</prop> -->
+<!-- 				<prop key="java.lang.Throwable">error/500</prop> -->
+<!-- 			</props> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+	
+	<!-- 登录识别码生成类配置 -->
+	<bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
+		<property name="config">
+			<bean class="com.google.code.kaptcha.util.Config">
+				<constructor-arg>
+					 <props>    
+	                       <!-- prop key="kaptcha.border">no</prop>    
+	                       <prop key="kaptcha.border.color">105,179,90</prop-->    
+	                       <prop key="kaptcha.textproducer.font.color">black</prop>    
+	                       <prop key="kaptcha.image.width">250</prop>
+	                       <prop key="kaptcha.image.height">90</prop>    
+	                       <prop key="kaptcha.textproducer.font.size">60</prop>
+	                       <!-- prop key="kaptcha.textproducer.char.string">0123456789</prop-->   
+	                       <prop key="kaptcha.textproducer.char.length">${captcha.length}</prop>    
+	                       <!-- prop key="kaptcha.textproducer.font.names">宋体,楷体,微软雅黑</prop-->    
+	                   </props>
+                 </constructor-arg> 
+			</bean>
 		</property>
 	</bean>
  	

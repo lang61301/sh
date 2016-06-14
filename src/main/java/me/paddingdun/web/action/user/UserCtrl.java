@@ -16,7 +16,7 @@ import me.paddingdun.data.paging.IDataCollection;
 import me.paddingdun.data.paging.Paging;
 import me.paddingdun.service.user.IUserService;
 import me.paddingdun.util.GsonHelper;
-import me.paddingdun.web.action.BaseController;
+import me.paddingdun.web.action.BaseCtrl;
 import me.paddingdun.web.util.WebHelper;
 
 /**
@@ -27,12 +27,12 @@ import me.paddingdun.web.util.WebHelper;
  */
 @Controller
 @RequestMapping(value="/user")
-public class UserController extends BaseController{
+public class UserCtrl extends BaseCtrl{
 
 	/**
 	 * UserController 日志变量;
 	 */
-	private final static Logger logger = Logger.getLogger(UserController.class);
+	private final static Logger logger = Logger.getLogger(UserCtrl.class);
 
 	
 	@Autowired
@@ -52,7 +52,7 @@ public class UserController extends BaseController{
 		
 		JsonResult2 jr = new JsonResult2();
 		jr.setData(data);
-		WebHelper.rtnAjax(response, GsonHelper.gson(), jr); 
+		WebHelper.rtnAjax(response, GsonHelper.create(), jr); 
 		
 		
 		logger.info("list user! ");

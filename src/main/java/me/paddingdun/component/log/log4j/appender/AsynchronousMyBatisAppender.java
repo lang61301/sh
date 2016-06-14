@@ -39,6 +39,7 @@ import me.paddingdun.data.SysLog;
  */
 @Component
 @Lazy(false)
+@SuppressWarnings({"unchecked"})
 public class AsynchronousMyBatisAppender extends AppenderSkeleton implements Appender, Runnable {
 	
 	private String loggingEventClass = SysLog.class.getName();

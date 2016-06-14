@@ -19,7 +19,7 @@ import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 
 import me.paddingdun.util.DateHelper;
-import me.paddingdun.web.action.BaseController;
+import me.paddingdun.web.action.BaseCtrl;
 import me.paddingdun.web.util.SessionHelper;
 import me.paddingdun.web.util.WebHelper;
 
@@ -31,7 +31,7 @@ import me.paddingdun.web.util.WebHelper;
  */
 @Controller
 @RequestMapping("/captcha")
-public class CaptchaController extends BaseController {
+public class CaptchaCtrl extends BaseCtrl {
 	
 	@Autowired
 	private DefaultKaptcha kaptcha;

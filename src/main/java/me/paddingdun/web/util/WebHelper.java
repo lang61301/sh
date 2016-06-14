@@ -11,7 +11,6 @@ import org.apache.log4j.Logger;
 
 import com.google.gson.Gson;
 
-import me.paddingdun.data.json.JsonResult;
 import me.paddingdun.data.json.JsonResult2;
 
 /**
@@ -19,6 +18,7 @@ import me.paddingdun.data.json.JsonResult2;
  * @author admin
  *
  */
+@SuppressWarnings("unused")
 public class WebHelper {
 	
 	/**
