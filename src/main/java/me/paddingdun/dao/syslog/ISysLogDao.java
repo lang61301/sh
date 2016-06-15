@@ -5,7 +5,7 @@ package me.paddingdun.dao.syslog;
 
 import org.springframework.stereotype.Repository;
 
-import me.paddingdun.data.SysLog;
+import me.paddingdun.component.log.log4j.ILog;
 
 
 /**
@@ -17,5 +17,5 @@ import me.paddingdun.data.SysLog;
 @Repository
 public interface ISysLogDao {
 	
-	void saveSysLog(SysLog log);
+	void saveSysLog(ILog log);
 }

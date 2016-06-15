@@ -11,16 +11,6 @@
     <title><spring:message code="app.title" /></title>
     
 	<cus:Css/>
-	
-    <style type="text/css">
-    body {
-	  padding-top: 40px;
-	  padding-bottom: 40px;
-	  background-color: #eee;
-	}
-	
-	/** 页脚******/
-    </style>
   </head>
   <body>
     <div class="container">

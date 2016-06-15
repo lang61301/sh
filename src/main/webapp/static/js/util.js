@@ -1,6 +1,38 @@
 "use strict"
 if(!!!me){ var me = {};};
 if(!!!(me.pdd))me.pdd={};
+
+/**
+ * 工具类;
+ */
+if(!!!(me.pdd.Util))me.pdd.Util = (function(){
+	function session_ajax_timeout(xhr){
+		/**
+		 * 状态
+		 * 是否有json数据返回
+		 * 是否有json 超时返回
+		 * 防止弹出过多弹出框
+		 */
+		if(xhr.status == 200
+				&& (window.sessionTimeout == undefined
+						|| window.sessionTimeout == false)
+				&& (xhr["responseJSON"] != undefined )
+				&& ( (typeof xhr["responseJSON"]) == "object")
+				&& (-9998 == xhr["responseJSON"]["status"])){
+			window.sessionTimeout = true;
+			return true;
+		}
+		return false;
+	}
+	
+	return {
+		"session_ajax_timeout":session_ajax_timeout
+	};
+})($);
+
+/**
+ * datatables fix;
+ */
 if(!!!(me.pdd.DataTable))me.pdd.DataTable = (function($) {
 	/**
 	 * column[0][search][regex]为column[0][searchRegex]
@@ -17,7 +49,7 @@ if(!!!(me.pdd.DataTable))me.pdd.DataTable = (function($) {
 	}
 	
 	return {
-		"plainfy_datatables":plainfy_datatables
+		"plainfy_datatables":plainfy_datatables,
 	};
 })($);
 

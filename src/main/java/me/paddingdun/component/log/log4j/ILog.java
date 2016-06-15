@@ -11,7 +11,7 @@ import java.util.Date;
  *
  * 2015年11月3日
  */
-public interface Log extends Serializable {
+public interface ILog extends Serializable {
 
 	void setCreateTime(Date date);
 }

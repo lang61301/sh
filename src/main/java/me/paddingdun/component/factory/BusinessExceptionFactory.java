@@ -30,7 +30,7 @@ public class BusinessExceptionFactory {
 	 * @param message
 	 * @return
 	 */
-	public static BusinessException createCommonException(String errorCode, String message){
+	public static BusinessException createCommonException(int errorCode, String message){
 		if (logger.isDebugEnabled()) {
 			logger.debug(String.format("CommonExceptionFactory.createCommonException:errorCode[%s], message[%s]", errorCode, message));
 		}
@@ -44,7 +44,7 @@ public class BusinessExceptionFactory {
 	 * @param messageCode
 	 * @return
 	 */
-	public static BusinessException createCommonException2(String errorCode, String messageCode){
+	public static BusinessException createCommonException2(int errorCode, String messageCode){
 		return createCommonException2(errorCode, messageCode, new Object[0]);
 	}
 	
@@ -55,7 +55,7 @@ public class BusinessExceptionFactory {
 	 * @param obj
 	 * @return
 	 */
-	public static BusinessException createCommonException2(String errorCode, String messageCode, Object[] obj){
+	public static BusinessException createCommonException2(int errorCode, String messageCode, Object[] obj){
 		if (logger.isDebugEnabled()) {
 			logger.debug(String.format("CommonExceptionFactory.createCommonException2:errorCode[%s], messgeCode[%s]", errorCode, messageCode));
 		}

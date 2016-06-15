@@ -1,4 +1,7 @@
 <%@page contentType="text/html; charset=utf-8"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib tagdir="/WEB-INF/tags" prefix="cus" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
@@ -6,143 +9,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>main</title>
-
-    <!-- 新 Bootstrap 核心 CSS 文件 -->
-	<link rel="stylesheet" href="static/js/bootstrap/css/bootstrap.min.css">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <style type="text/css">
-    /*
-	 * Base structure
-	 */
-	
-	/* Move down content because we have a fixed navbar that is 50px tall */
-	body {
-	  padding-top: 50px;
-	}
-	
-	
-	/*
-	 * Global add-ons
-	 */
-	
-	.sub-header {
-	  padding-bottom: 10px;
-	  border-bottom: 1px solid #eee;
-	}
-	
-	/*
-	 * Top navigation
-	 * Hide default border to remove 1px line.
-	 */
-	.navbar-fixed-top {
-	  border: 0;
-	}
-	
-	/*
-	 * Sidebar
-	 */
-	
-	/* Hide for mobile, show later */
-	.sidebar {
-	  display: none;
-	}
-	@media (min-width: 768px) {
-	  .sidebar {
-	    position: fixed;
-	    top: 51px;
-	    bottom: 0;
-	    left: 0;
-	    z-index: 1000;
-	    display: block;
-	    padding: 20px;
-	    overflow-x: hidden;
-	    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-	    background-color: #f5f5f5;
-	    border-right: 1px solid #eee;
-	  }
-	}
-	
-	/* Sidebar navigation */
-	.nav-sidebar {
-	  margin-right: -21px; /* 20px padding + 1px border */
-	  margin-bottom: 20px;
-	  margin-left: -20px;
-	}
-	.nav-sidebar > li > a {
-	  padding-right: 20px;
-	  padding-left: 20px;
-	}
-	.nav-sidebar > .active > a,
-	.nav-sidebar > .active > a:hover,
-	.nav-sidebar > .active > a:focus {
-	  color: #fff;
-	  background-color: #428bca;
-	}
-	
-	
-	/*
-	 * Main content
-	 */
-	
-	.main {
-	  padding: 20px;
-	}
-	@media (min-width: 768px) {
-	  .main {
-	    padding-right: 40px;
-	    padding-left: 40px;
-	  }
-	}
-	.main .page-header {
-	  margin-top: 0;
-	}
-	
-	
-	/*
-	 * Placeholder dashboard ideas
-	 */
-	
-	.placeholders {
-	  margin-bottom: 30px;
-	  text-align: center;
-	}
-	.placeholders h4 {
-	  margin-bottom: 0;
-	}
-	.placeholder {
-	  margin-bottom: 20px;
-	}
-	.placeholder img {
-	  display: inline-block;
-	  border-radius: 50%;
-	}
-    </style>
+    <title><spring:message code="app.title" /></title>
+	<%-- 引用公共css文件 --%>
+    <cus:Css/>
+    
   </head>
   <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
+            <span class="sr-only"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>
+          <a class="navbar-brand" href="#">项目</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="logout">退出</a></li>
+            <li><a href="${_ctx }/logout">退出</a></li>
           </ul>
           <form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">
@@ -153,190 +39,50 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Reports</a></li>
-            <li><a href="#">Analytics</a></li>
-            <li><a href="#">Export</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="">Nav item</a></li>
-            <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
-            <li><a href="">More navigation</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
-          </ul>
+          <div class="panel-group" role="tablist" id="menuList">
+          <c:forEach items="${sys_menu }" var="s1" varStatus="m">
+		    <div class="panel panel-default">
+		      <div class="panel-heading" role="tab">
+		        <h4 class="panel-title">
+		          <a class="" role="button" data-toggle="collapse" href="#collapseListGroup${s1.nodeId }" data-parent="#menuList" aria-expanded="true" aria-controls="collapseListGroup${s1.nodeId }">
+		            	${s1.nodeName }
+		          </a>
+		        </h4>
+		      </div>
+		      <div id="collapseListGroup${s1.nodeId }" class="panel-collapse collapse <c:if test='${m.index==0}'>in</c:if>" role="tabpanel" aria-expanded="true">
+		        <ul class="list-group">
+		        <c:forEach items="${s1.children }" var="s2">
+		        	 <li class="list-group-item"><a class="nav-link" href="#" data-href="<c:if test='${s2.object.url!=null }'>${_ctx }/${s2.object.url}</c:if>">${s2.nodeName }</a></li>
+		        </c:forEach>
+		        </ul>
+		      </div>
+		    </div>
+		    </c:forEach>
+		  </div>
         </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Dashboard</h1>
-
-          <div class="row placeholders">
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-          </div>
-
-          <h2 class="sub-header">Section title</h2>
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
-                </tr>
-                <tr>
-                  <td>1,002</td>
-                  <td>amet</td>
-                  <td>consectetur</td>
-                  <td>adipiscing</td>
-                  <td>elit</td>
-                </tr>
-                <tr>
-                  <td>1,003</td>
-                  <td>Integer</td>
-                  <td>nec</td>
-                  <td>odio</td>
-                  <td>Praesent</td>
-                </tr>
-                <tr>
-                  <td>1,003</td>
-                  <td>libero</td>
-                  <td>Sed</td>
-                  <td>cursus</td>
-                  <td>ante</td>
-                </tr>
-                <tr>
-                  <td>1,004</td>
-                  <td>dapibus</td>
-                  <td>diam</td>
-                  <td>Sed</td>
-                  <td>nisi</td>
-                </tr>
-                <tr>
-                  <td>1,005</td>
-                  <td>Nulla</td>
-                  <td>quis</td>
-                  <td>sem</td>
-                  <td>at</td>
-                </tr>
-                <tr>
-                  <td>1,006</td>
-                  <td>nibh</td>
-                  <td>elementum</td>
-                  <td>imperdiet</td>
-                  <td>Duis</td>
-                </tr>
-                <tr>
-                  <td>1,007</td>
-                  <td>sagittis</td>
-                  <td>ipsum</td>
-                  <td>Praesent</td>
-                  <td>mauris</td>
-                </tr>
-                <tr>
-                  <td>1,008</td>
-                  <td>Fusce</td>
-                  <td>nec</td>
-                  <td>tellus</td>
-                  <td>sed</td>
-                </tr>
-                <tr>
-                  <td>1,009</td>
-                  <td>augue</td>
-                  <td>semper</td>
-                  <td>porta</td>
-                  <td>Mauris</td>
-                </tr>
-                <tr>
-                  <td>1,010</td>
-                  <td>massa</td>
-                  <td>Vestibulum</td>
-                  <td>lacinia</td>
-                  <td>arcu</td>
-                </tr>
-                <tr>
-                  <td>1,011</td>
-                  <td>eget</td>
-                  <td>nulla</td>
-                  <td>Class</td>
-                  <td>aptent</td>
-                </tr>
-                <tr>
-                  <td>1,012</td>
-                  <td>taciti</td>
-                  <td>sociosqu</td>
-                  <td>ad</td>
-                  <td>litora</td>
-                </tr>
-                <tr>
-                  <td>1,013</td>
-                  <td>torquent</td>
-                  <td>per</td>
-                  <td>conubia</td>
-                  <td>nostra</td>
-                </tr>
-                <tr>
-                  <td>1,014</td>
-                  <td>per</td>
-                  <td>inceptos</td>
-                  <td>himenaeos</td>
-                  <td>Curabitur</td>
-                </tr>
-                <tr>
-                  <td>1,015</td>
-                  <td>sodales</td>
-                  <td>ligula</td>
-                  <td>in</td>
-                  <td>libero</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main detail-right-content">
         </div>
       </div>
     </div>
-<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-<script type="text/javascript src="static/js/jquery/jquery.min.js"></script>
-<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script type="text/javascript src="static/js/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-	
-});
-</script>
+    
+	<%-- 引用的公共javascript文件--%>
+	<cus:JavaScript/>
+	<script type="text/javascript">
+	$(document).ajaxStart(function (a, b, c) {
+		}).ajaxSend(function (e, jqXHR, options) {
+		}).ajaxError(function (e, xhr, opts) {
+		}).ajaxSuccess(function (e, xhr, opts) {
+			if(!!window.sessionTimeout)return false;
+			if(me.pdd.Util.session_ajax_timeout(xhr)){
+				alert("登录已超时,请重新登录");
+				window.location.href = "${_ctx}/login.jsp";
+				return false;
+			}
+		}).ajaxComplete(function (e, xhr, options) {
+		}).ajaxStop(function () {
+		}).ready(function(){
+			Index.init();
+	});
+	</script>
 </body>
 </html>

@@ -25,10 +25,9 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
 
+import me.paddingdun.component.log.log4j.ILog;
 import me.paddingdun.component.log.log4j.ILogConstant;
-import me.paddingdun.component.log.log4j.Log;
 import me.paddingdun.dao.syslog.ISysLogDao;
-import me.paddingdun.data.SysLog;
 
 
 /**
@@ -39,12 +38,11 @@ import me.paddingdun.data.SysLog;
  */
 @Component
 @Lazy(false)
-@SuppressWarnings({"unchecked"})
 public class AsynchronousMyBatisAppender extends AppenderSkeleton implements Appender, Runnable {
 	
-	private String loggingEventClass = SysLog.class.getName();
+	private String loggingEventClass = ILog.class.getName();
 	
-	private Class<Log> loggingEvent;
+	private Class<ILog> loggingEvent;
 	
 	/**
 	 * spring 注入;
@@ -187,10 +185,10 @@ public class AsynchronousMyBatisAppender extends AppenderSkeleton implements App
 	 */
 	private void doAddMessage(final LoggingEvent event) {
 		Object obj = event.getMessage();
-		if( obj != null && obj instanceof Log){
-			Log l = (Log)obj;
+		if( obj != null && obj instanceof ILog){
+			ILog l = (ILog)obj;
 			l.setCreateTime(new Date(event.timeStamp));
-			sysLogDao.saveSysLog((SysLog)l);
+			sysLogDao.saveSysLog(l);
 		}
 	}
 	/**
@@ -286,14 +284,14 @@ public class AsynchronousMyBatisAppender extends AppenderSkeleton implements App
 	 *
 	 * @param string qualified class name
 	 */
-	public void setLoggingEventClass(String string) {
-		loggingEventClass = string;
-		try {
-			setLoggingEvent((Class<Log>) Class.forName(loggingEventClass));
-		} catch (ClassNotFoundException cnfe) {
-			logError("Invalid LoggingEvent class " + string, cnfe, ErrorCode.GENERIC_FAILURE);
-		}
-	}
+//	public void setLoggingEventClass(String string) {
+//		loggingEventClass = string;
+//		try {
+//			setLoggingEvent((Class<ILog>) Class.forName(loggingEventClass));
+//		} catch (ClassNotFoundException cnfe) {
+//			logError("Invalid LoggingEvent class " + string, cnfe, ErrorCode.GENERIC_FAILURE);
+//		}
+//	}
 	/**
 	 * {@inheritDoc}
 	 * <p>Stops the queue thread if it was running.</p>
@@ -306,7 +304,7 @@ public class AsynchronousMyBatisAppender extends AppenderSkeleton implements App
 	 * Gets the logging event class.
 	 * @return the logging event class
 	 */
-	public Class<Log> getLoggingEvent() {
+	public Class<ILog> getLoggingEvent() {
 		return loggingEvent;
 	}
 
@@ -314,7 +312,7 @@ public class AsynchronousMyBatisAppender extends AppenderSkeleton implements App
 	 * Sets the logging event class
 	 * @param loggingEventClass the logging event class to set
 	 */
-	public void setLoggingEvent(Class<Log> loggingEventClass) {
+	public void setLoggingEvent(Class<ILog> loggingEventClass) {
 		this.loggingEvent = loggingEventClass;
 	}
 	/**

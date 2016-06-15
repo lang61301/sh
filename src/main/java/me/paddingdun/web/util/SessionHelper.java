@@ -3,14 +3,10 @@
  */
 package me.paddingdun.web.util;
 
-import static me.paddingdun.web.util.IAppConstant.USER_SESSION_KEY;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
-
-import me.paddingdun.web.login.LoginUser;
 
 /**
  * @author paddingdun
@@ -24,16 +20,6 @@ public class SessionHelper {
 	private final static Logger logger = Logger.getLogger(SessionHelper.class);
 
 
-
-	public static LoginUser loginUser(HttpServletRequest request){
-		return loginUser(request.getSession());
-	}
-	
-	public static LoginUser loginUser(HttpSession session){
-		LoginUser loginUser = (LoginUser)attr(session, USER_SESSION_KEY);
-		return loginUser;
-	}
-	
 	public static void attr(HttpServletRequest request, String key, Object obj){
 		request.setAttribute(key, obj);
 	}
