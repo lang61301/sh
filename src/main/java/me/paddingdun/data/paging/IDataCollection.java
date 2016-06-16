@@ -10,17 +10,9 @@ import java.util.List;
  */
 public interface IDataCollection<T> {
 
-	/**
-	 * 当前第几页;
-	 * @return
-	 */
-	Integer getPage();
+	Integer getStart();
 	
-	/**
-	 * 每页行数;
-	 * @return
-	 */
-	Integer getPageSize();
+	Integer getLength();
 	
 	/**
 	 * 总记录数;
@@ -33,4 +25,9 @@ public interface IDataCollection<T> {
 	 * @return
 	 */
 	List<T> getData();
+	
+	
+	void setData(List<T> data);
+	
+	List<T> getListproNames();
 }

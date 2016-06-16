@@ -34,7 +34,9 @@ public class FormAuthentication extends FormAuthenticationFilter {
                 return true;
             }
         } else {
-            saveRequestAndRedirectToLogin(request, response);
+        	//不记录登录前访问的页面
+//            saveRequestAndRedirectToLogin(request, response);
+        	redirectToLogin(request, response);
             return false;
         }
     }
@@ -74,5 +76,4 @@ public class FormAuthentication extends FormAuthenticationFilter {
 		}
 		return a || onAccessDenied(request, response, mappedValue);
 	}
-
 }
