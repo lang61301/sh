@@ -5,7 +5,7 @@
 <%-- 验证输入样式--%>
 <link rel="stylesheet" href="${_ctx}/static/js/bootstrapvalidator/css/bootstrapValidator.min.css">
 <%-- datatable 样式--%>
-<link rel="stylesheet" href="${_ctx}/static/js/datatable/1.1/css/jquery.dataTables.min.css">
+<%--<link rel="stylesheet" href="${_ctx}/static/js/datatable/1.1/css/jquery.dataTables.min.css">--%>
 <%-- datatables bootstrap 样式文件--%>
 <link rel="stylesheet" href="${_ctx}/static/js/datatable/1.1/css/dataTables.bootstrap.min.css">
 <%--ztree 文件 --%>
