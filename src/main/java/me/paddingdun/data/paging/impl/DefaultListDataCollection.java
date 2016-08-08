@@ -4,6 +4,7 @@ import java.util.List;
 
 import me.paddingdun.data.paging.IDataCollection;
 
+
 /**
  * 分页集合默认实现;
  * @author paddingdun
@@ -12,27 +13,36 @@ import me.paddingdun.data.paging.IDataCollection;
  */
 public class DefaultListDataCollection<T> implements IDataCollection<T> {
 	
-	private Integer page;
-	private Integer pageSize;
+	private Integer start;
+	private Integer length;
 	private Integer total;
 	
 	private List<T> data;
+	private List<T> listproNames;
 
-
-	public Integer getPage() {
-		return page;
+	
+	public List<T> getListproNames() {
+		return listproNames;
 	}
 
-	public void setPage(Integer page) {
-		this.page = page;
+	public void setListproNames(List<T> listproNames) {
+		this.listproNames = listproNames;
 	}
 
-	public Integer getPageSize() {
-		return pageSize;
+	public Integer getStart() {
+		return start;
 	}
 
-	public void setPageSize(Integer pageSize) {
-		this.pageSize = pageSize;
+	public void setStart(Integer start) {
+		this.start = start;
+	}
+
+	public Integer getLength() {
+		return length;
+	}
+
+	public void setLength(Integer length) {
+		this.length = length;
 	}
 
 	public Integer getTotal() {
@@ -50,5 +60,4 @@ public class DefaultListDataCollection<T> implements IDataCollection<T> {
 	public void setData(List<T> data) {
 		this.data = data;
 	}
-
 }

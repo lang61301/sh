@@ -3,7 +3,7 @@ var Tables = function($){
 	function init($table, setting){
 		setting = $.extend({
 			//table的元素结构，将生成下方的表格信息，页面分割，单页行数
-			"dom": "t<'row'<'col-md-3 col-sm-6'i><'col-md-3 col-sm-6'l><'col-md-6 col-sm-12'p>>",
+			"dom": "t<'row'<'col-md-2 col-sm-6'i><'col-md-3 col-sm-6'l><'col-md-7 col-sm-12'p>>",
 			"language": {
 				"aria": {
 					"sortAscending": ": activate to sort column ascending",
@@ -17,10 +17,10 @@ var Tables = function($){
 				"search": "Search:",
 				"zeroRecords": "No matching records found",
 				"paginate": {
-					"previous": "Prev",
-					"next": "Next",
-					"last": "Last",
-					"first": "First"
+					"previous": "上一页",
+					"next": "下一页",
+					"last": "末页",
+					"first": "首页"
 				}
 			},
 			"fixedColumns": {

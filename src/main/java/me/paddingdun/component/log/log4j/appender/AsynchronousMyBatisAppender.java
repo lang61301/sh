@@ -36,8 +36,8 @@ import me.paddingdun.dao.syslog.ISysLogDao;
  *
  * 2015年11月3日
  */
-@Component
-@Lazy(false)
+//@Component
+//@Lazy(false)
 public class AsynchronousMyBatisAppender extends AppenderSkeleton implements Appender, Runnable {
 	
 	private String loggingEventClass = ILog.class.getName();

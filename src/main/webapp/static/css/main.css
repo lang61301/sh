@@ -113,3 +113,11 @@ body {
   height: 60px;
   background-color: #f5f5f5;
 }
+
+.input_middle{
+	text-align:center;
+}
+
+.input_middle input{
+	vertical-align:middle;
+}

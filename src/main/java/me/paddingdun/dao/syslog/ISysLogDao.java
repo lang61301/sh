@@ -14,7 +14,7 @@ import me.paddingdun.component.log.log4j.ILog;
  *
  * 2015年11月4日
  */
-@Repository
+//@Repository
 public interface ISysLogDao {
 	
 	void saveSysLog(ILog log);

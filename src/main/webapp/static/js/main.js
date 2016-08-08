@@ -3,7 +3,7 @@ var Index = (function(){
 	var $container = $(".detail-right-content");
 	
 	function init(){
-		$(".sidebar").on("click.nav-link", ".nav-link", function(){
+		$(".sidebar").on("click.nav-link", ".nav-link", function(e){
 			e.preventDefault();
 			e.stopPropagation();
 			

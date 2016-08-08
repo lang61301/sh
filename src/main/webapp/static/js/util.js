@@ -56,7 +56,7 @@ if(!!!(me.pdd.DataTable))me.pdd.DataTable = (function($) {
 /**
  * form工具类;
  */
-if(!!!(me.pdd.Util))me.pdd.Form = (function($){
+if(!!!(me.pdd.Form))me.pdd.Form = (function($){
 	function getForm (form){
 		var inputs = $(form).find(":input");
 	      var tmp = {};
