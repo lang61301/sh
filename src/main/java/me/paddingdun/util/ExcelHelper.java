@@ -34,6 +34,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * excel工具;
  * 2015年11月30日
  */
+@SuppressWarnings({"unused"})
 public class ExcelHelper {
 	
 	/**
@@ -141,6 +142,7 @@ public class ExcelHelper {
 	 */
 	public static String getCellValue(FormulaEvaluator evaluator, Sheet sheet, int row, int column){
 		Cell cell = getCell(sheet, row, column);
+		if(cell == null)return "";
 		return getCellValue(cell, evaluator) ;     
 	}
 	
