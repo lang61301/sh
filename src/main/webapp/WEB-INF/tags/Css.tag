@@ -12,6 +12,8 @@
 <link rel="stylesheet" href="${_ctx}/static/js/ztree/css/zTreeStyle/zTreeStyle.css">
 <%--日期样式 --%>
 <link rel="stylesheet" href="${_ctx}/static/js/My97DatePicker/skin/WdatePicker.css">
+<%--上传uploadify --%>
+<link rel="stylesheet" href="${_ctx}/static/js/uploadify/uploadify.css">
 
 <%--main  CSS 文件 --%>
 <link rel="stylesheet" href="${_ctx}/static/css/main.css?ver=<%=me.paddingdun.web.util.IResourceVersion.VERSION %>">

@@ -21,6 +21,9 @@
 <%--日期 文件 --%>
 <script type="text/javascript" src="${_ctx}/static/js/My97DatePicker/WdatePicker.js"></script>
 
+<%--上传uploadify --%>
+<script type="text/javascript" src="${_ctx}/static/js/uploadify/jquery.uploadify.fix.js"></script>
+
 <%--应用工具类 --%>
 <script type="text/javascript" src="${_ctx}/static/js/util.js?ver=<%=me.paddingdun.web.util.IResourceVersion.VERSION %>"></script>
 <%--默认datatables构造文件 --%>
