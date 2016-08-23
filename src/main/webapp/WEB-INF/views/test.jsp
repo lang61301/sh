@@ -20,11 +20,35 @@
 		
 		<input id="uploadFile" name="uploadFile" type="file" multiple="true">
 	</form>
+	<textarea rows="30" cols="30" id="editor"></textarea>
     
 	<%-- 引用的公共javascript文件--%>
 	<cus:JavaScript/>
 	<script type="text/javascript">
 	$(document).ready(function(){
+		/**CKEDITOR.editorConfig = function( config ) {
+			// Define changes to default configuration here. For example:
+			// config.language = 'fr';
+			config.toolbar_AAA =
+				[
+				    ['Bold', 'Italic', 'Underline', '-', 'NumberedList', 'BulletedList', '-','Outdent','Indent','-','Image']
+				];
+			
+			config.uiColor = '#34dd45';
+		};**/
+
+		CKEDITOR.replace("editor",{
+			customConfig: '',
+			toolbar_Basic :
+				[
+				    ['Source','-','Bold', 'Italic', 'Underline', '-', 'NumberedList', 'BulletedList', '-','Outdent','Indent', '-', 'Image']
+				],
+			toolbar:"Basic",
+			baseHref : 'http://localhost:8080/yjtk/',
+			filebrowserImageUploadUrl :'${_ctx}/test/upload',
+			removeDialogTabs :'image:advanced;image:Link',
+		});
+		
 		$('#uploadFile').uploadify({
 			'multi':false,
 			'buttonText':'选择文件',
