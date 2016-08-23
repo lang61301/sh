@@ -17,7 +17,9 @@ import org.apache.log4j.Logger;
  *
  * 2015年11月30日
  */
-public class IOHelper {
+public class IOHelper { 
+	
+	static int MAX_CACHE_LENGTH = 1024 * 1024;
 	/**
 	 * IOHelper 日志变量;
 	 */
@@ -61,6 +63,15 @@ public class IOHelper {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		}
+	}
+	
+	public static void dump(InputStream in, OutputStream out)throws IOException{
+		byte[] buffer = new byte[MAX_CACHE_LENGTH];
+		int length = -1;
+		while((length = in.read(buffer)) > -1){
+			out.write(buffer, 0, length);
+			out.flush();
 		}
 	}
 
