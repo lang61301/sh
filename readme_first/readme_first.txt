@@ -8,5 +8,7 @@ jsp中使用:
 	使用:
 	<spring:message code="key" /> key可以替换为对应的键值:user.login.name
 java文件中使用:
-	MessageHolder.getMessage("user.login.head")
+	MessageHolder.getMessage("user.login.head");
+	
+3.ckeditor中自定义了image.js, image_raw.js为原版js. 为了和springmvc的action整合, 将上传控件的name命名为uploadFile
 	
