@@ -24,6 +24,4 @@
 			</array>
 		</property>
 	</bean>
-	
-	<import resource="spring-mybatis.xml"/>
 </beans>

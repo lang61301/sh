@@ -45,7 +45,7 @@
 <!-- <bean id="scheduler2" class="org.springframework.scheduling.quartz.SchedulerFactoryBean"> -->
 <!--     <property name="triggers"> -->
 <!--         <list> -->
-<!-- <!--             <ref bean="myTrigger"/> --> -->
+<!--              <ref bean="myTrigger"/> -->
 <!--         </list> -->
 <!--     </property> -->
 <!-- </bean> -->
