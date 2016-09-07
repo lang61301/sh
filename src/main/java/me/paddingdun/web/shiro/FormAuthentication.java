@@ -7,6 +7,8 @@ import java.io.IOException;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -14,6 +16,13 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.apache.shiro.web.util.WebUtils;
+
+import com.google.gson.Gson;
+
+import me.paddingdun.data.json.JsonResult2;
+import me.paddingdun.exception.IErrorCode;
+import me.paddingdun.util.GsonHelper;
+import me.paddingdun.web.util.WebHelper;
 
 /**
  * 
@@ -34,9 +43,18 @@ public class FormAuthentication extends FormAuthenticationFilter {
                 return true;
             }
         } else {
-        	//不记录登录前访问的页面
-//            saveRequestAndRedirectToLogin(request, response);
-        	redirectToLogin(request, response);
+        	HttpServletRequest res = (HttpServletRequest)request;
+        	HttpServletResponse rp = (HttpServletResponse)response;
+        	if(WebHelper.isAjaxHttprequest(res)){
+        		Gson gson = GsonHelper.create();
+        		JsonResult2<Void>  jr = new JsonResult2<Void>();
+        		jr.setStatus(IErrorCode.SESSION_TIMEOUT);
+        		WebHelper.rtnAjax(rp, gson, jr);
+        	}else{
+        		//不记录登录前访问的页面
+//              saveRequestAndRedirectToLogin(request, response);
+        		redirectToLogin(request, response);
+        	}
             return false;
         }
     }

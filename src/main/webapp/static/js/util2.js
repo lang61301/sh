@@ -1,11 +1,14 @@
 "use strict"
+/**
+ * 2016-09-07
+ * 重新修订版本;
+ */
 if(!!!me){ var me = {};};
-if(!!!(me.pdd))me.pdd={};
 
 /**
  * 工具类;
  */
-if(!!!(me.pdd.Util))me.pdd.Util = (function(){
+if(!!!(me.Util))me.Util = (function($){
 	function session_ajax_timeout(xhr){
 		/**
 		 * 状态
@@ -18,7 +21,7 @@ if(!!!(me.pdd.Util))me.pdd.Util = (function(){
 						|| window.sessionTimeout == false)
 				&& (xhr["responseJSON"] != undefined )
 				&& ( (typeof xhr["responseJSON"]) == "object")
-				&& (-9998 == xhr["responseJSON"]["status"])){
+				&& (9998 == xhr["responseJSON"]["status"])){
 			window.sessionTimeout = true;
 			return true;
 		}
@@ -28,12 +31,12 @@ if(!!!(me.pdd.Util))me.pdd.Util = (function(){
 	return {
 		"session_ajax_timeout":session_ajax_timeout
 	};
-})($);
+})(jQuery);
 
 /**
  * datatables fix;
  */
-if(!!!(me.pdd.DataTable))me.pdd.DataTable = (function($) {
+if(!!!(me.DataTable))me.DataTable = (function($) {
 	/**
 	 * column[0][search][regex]为column[0][searchRegex]
 	 * 修正datatables参数传递;
@@ -51,12 +54,12 @@ if(!!!(me.pdd.DataTable))me.pdd.DataTable = (function($) {
 	return {
 		"plainfy_datatables":plainfy_datatables,
 	};
-})($);
+})(jQuery);
 
 /**
  * form工具类;
  */
-if(!!!(me.pdd.Form))me.pdd.Form = (function($){
+if(!!!(me.Form))me.Form = (function($){
 	function getForm (form){
 		var inputs = $(form).find(":input");
 	      var tmp = {};
@@ -105,12 +108,38 @@ if(!!!(me.pdd.Form))me.pdd.Form = (function($){
 		}
 		return rtn;
 	}
-	function setForm(form, obj){
+	
+	/**
+	 * setval:当该函数不为空时,设值操作交由用户;
+	 */
+	function setForm(form, obj, setval){
 		clearForm(form);
+		var cus = false;
+		if(!!setval && (typeof setval) == "function"){
+			cus = true;
+		}
+		
 		for(var name in obj){
 			var e = obj[name];
-			var input = $(form).find(":input[name=" + name + "]");
-			input.val(e);
+			if($.isArray(e)){
+				for(var i = 0; i < e.length; i++){
+					var o = e[i];
+					for(var k in o){
+						var n = name+"["+i+"]."+k;
+						var input = $(form).find(":input[name='" + n + "']");
+						if(cus)
+							setval.apply(this, [input, o[k]]);
+						else
+							input.val(o[k]);
+					}
+				}
+			}else{
+				var input = $(form).find(":input[name=" + name + "]");
+				if(cus)
+					setval.apply(this, [input, e]);
+				else
+					input.val(e);
+			}
 		}
 	}
 	
@@ -152,4 +181,4 @@ if(!!!(me.pdd.Form))me.pdd.Form = (function($){
 		"clearSameNameInput":clearSameNameInput,
 		"clearForm":clearForm
 	};
-})($);
+})(jQuery);

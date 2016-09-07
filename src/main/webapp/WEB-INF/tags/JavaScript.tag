@@ -28,7 +28,7 @@
 <script type="text/javascript" src="${_ctx}/static/js/ckeditor/ckeditor.js"></script>
 
 <%--应用工具类 --%>
-<script type="text/javascript" src="${_ctx}/static/js/util.js?ver=<%=me.paddingdun.web.util.IResourceVersion.VERSION %>"></script>
+<script type="text/javascript" src="${_ctx}/static/js/util2.js?ver=<%=me.paddingdun.web.util.IResourceVersion.VERSION %>"></script>
 <%--默认datatables构造文件 --%>
 <script type="text/javascript" src="${_ctx}/static/js/tables.js?ver=<%=me.paddingdun.web.util.IResourceVersion.VERSION %>"></script>
 <%--main --%>

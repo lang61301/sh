@@ -17,10 +17,11 @@ public interface IErrorCode {
 	Integer TIME_OUT = -1;
 	Integer TOKEN_EXPIRED = 17;
 	
-	/**
+	/*
+	 * 全局异常设置为正值;
 	 * session超时;
 	 */
-	Integer SESSION_TIMEOUT = -9998;
+	Integer SESSION_TIMEOUT = 9998;
 	
 	/**
 	 * 无系统访问权限;

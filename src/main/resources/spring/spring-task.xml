@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+        http://www.springframework.org/schema/fex  
+        http://www.springframework.org/schema/fex/spring-fex-1.5.xsd  
+        http://www.springframework.org/schema/task   
+        http://www.springframework.org/schema/task/spring-task-3.0.xsd   
+        http://www.springframework.org/schema/context  
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd">  
+<!-- 由于使用spring自带的定时task,发生在windows虚拟机无法精确触发的问题, 特换成quartz调度 -->
+<!-- task:scheduler id="scheduler" pool-size="10" />
+     <task:scheduled-tasks scheduler="scheduler"> 
+   		  备注:cron 和quartz表达式略有区别, 不支持等类似描述 
+        <task:scheduled ref="ditm" method="doWork" cron="4 0/10 * * * ?"/>
+	 </task:scheduled-tasks>
+</task-->
+<!-- <bean id="jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> -->
+<!--     <property name="group" value="job_work"/> -->
+<!--     <property name="name" value="job_work_name"/> -->
+<!--     false表示等上一个任务执行完后再开启新的任务 -->
+<!--     <property name="concurrent" value="false"/> -->
+<!--     <property name="targetObject"> -->
+<!--         <ref bean="ditm"/> -->
+<!--     </property> -->
+<!--     <property name="targetMethod"> -->
+<!--         <value>doWork</value> -->
+<!--     </property> -->
+<!-- </bean> -->
+<!--  调度触发器 -->
+<!-- <bean id="myTrigger" -->
+<!--       class="org.springframework.scheduling.quartz.CronTriggerFactoryBean"> -->
+<!--     <property name="name" value="work_default_name"/> -->
+<!--     <property name="group" value="work_default"/> -->
+<!--     <property name="jobDetail"> -->
+<!--         <ref bean="jobDetail" /> -->
+<!--     </property> -->
+<!--     <property name="cronExpression"> -->
+<!--         <value>4 0/10 * * * ?</value> -->
+<!--     </property> -->
+<!-- </bean> -->
+<!-- 调度工厂 -->
+<!-- <bean id="scheduler2" class="org.springframework.scheduling.quartz.SchedulerFactoryBean"> -->
+<!--     <property name="triggers"> -->
+<!--         <list> -->
+<!-- <!--             <ref bean="myTrigger"/> --> -->
+<!--         </list> -->
+<!--     </property> -->
+<!-- </bean> -->
+</beans>

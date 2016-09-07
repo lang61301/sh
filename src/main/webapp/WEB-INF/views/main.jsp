@@ -73,7 +73,7 @@
 		}).ajaxError(function (e, xhr, opts) {
 		}).ajaxSuccess(function (e, xhr, opts) {
 			if(!!window.sessionTimeout)return false;
-			if(me.pdd.Util.session_ajax_timeout(xhr)){
+			if(me.Util.session_ajax_timeout(xhr)){
 				alert("登录已超时,请重新登录");
 				window.location.href = "${_ctx}/login.jsp";
 				return false;
