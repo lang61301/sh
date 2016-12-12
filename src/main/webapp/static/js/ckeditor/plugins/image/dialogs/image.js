@@ -597,14 +597,37 @@
                     label: d.lang.image.btnUpload,
                     "for": ["Upload", "uploadFile"],
                     onClick: function(){  
-                        var d = this.getDialog();  
-                        var _photo =  d.getContentElement('Upload','uploadFile');  
-                        var _funcNum = getFuncNum(_photo.action);  
+                    	 var d = this.getDialog();  
+                    	 
+                    	 //由于sping mvc response body json返回在ie11下下载json文件,故用jquery.form提交;
+                         var _photo =  d.getContentElement('Upload','uploadFile');  
+                         var form = _photo.getInputElement().getParent().$;
+                        jQuery(form).ajaxSubmit(
+                     			{	success:function(d1){
+                 					if(d1.status == 0){
+                 						//重置上传控件;
+                 						d.getContentElement('Upload', 'uploadFile').reset();
+                 						//获取url文本框;
+                 						var e = d.getContentElement('info', 'txtUrl');
+                 						//url文本框设值;
+                 						e.setValue(d1.data);
+                 						//切换到url文本框页面;
+                 						d.selectPage('info');
+                 					}else if(d1.status < 0){
+                 						alert(d1.msg);
+                 					}
+                 				},
+                 				error:function(e){
+                 				},
+                 				complete:function(e){
+                 				}
+                 		});
+                         //可以查看ckeditor.event doc 了解此段代码  
+                         //http://docs.cksource.com/ckeditor_api/  
+                        // _iframe.on('load', getAjaxResult, _iframe, _funcNum);
                         
-                        var _iframe =  CKEDITOR.document.getById(_photo._.frameId);  
-                        //可以查看ckeditor.event doc 了解此段代码  
-                        //http://docs.cksource.com/ckeditor_api/  
-                        _iframe.on('load', getAjaxResult, _iframe, _funcNum);
+                        //禁止form提交;
+                       return false;
                    }, 
                 }]
             },
