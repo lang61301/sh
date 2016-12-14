@@ -1,3 +1,4 @@
+<%@tag import="com.sun.tools.javac.resources.compiler"%>
 <%@ tag language="java" pageEncoding="UTF-8"%>
 <% session.setAttribute("_ctx", request.getContextPath()); %>
 <%-- 新 Bootstrap 核心 CSS 文件 --%>
@@ -16,5 +17,5 @@
 <link rel="stylesheet" href="${_ctx}/static/js/uploadify/uploadify.css">
 
 <%--main  CSS 文件 --%>
-<link rel="stylesheet" href="${_ctx}/static/css/main.css?ver=<%=me.paddingdun.web.util.IResourceVersion.VERSION %>">
+<link rel="stylesheet" href="${_ctx}/static/css/main.css?ver=<%=me.paddingdun.web.util.ResourceVersion.version() %>">
 
