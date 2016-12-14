@@ -1,5 +1,9 @@
 <%@ tag language="java" pageEncoding="UTF-8"%>
 <% session.setAttribute("_ctx", request.getContextPath()); %>
+<!--[if lte IE 9]>
+<script src="${_ctx }/static/js/bootstrap/3.3/js/respond.min.js"></script>
+<script src="${_ctx }/static/js/bootstrap/3.3/js/html5shiv.min.js"></script>
+<![endif]-->
 <%-- jQuery文件。务必在bootstrap.min.js 之前引入 --%>
 <script type="text/javascript" src="${_ctx }/static/js/jquery/2.1.4/jquery-2.1.4.min.js"></script>
 <%-- 最新的 Bootstrap 核心 JavaScript 文件 --%>

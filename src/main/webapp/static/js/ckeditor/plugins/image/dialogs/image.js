@@ -604,6 +604,11 @@
                          var form = _photo.getInputElement().getParent().$;
                         jQuery(form).ajaxSubmit(
                      			{	success:function(d1){
+                     				
+                     				//ie9 文件上传返回是字符串,所以转换为对象;
+                     				if(typeof d1 == "string"){
+                     					d1 = JSON.parse(d1);
+                     				}
                  					if(d1.status == 0){
                  						//重置上传控件;
                  						d.getContentElement('Upload', 'uploadFile').reset();
@@ -628,7 +633,7 @@
                         
                         //禁止form提交;
                        return false;
-                   }, 
+                   }
                 }]
             },
             {
