@@ -28,8 +28,41 @@ if(!!!(me.Util))me.Util = (function($){
 		return false;
 	}
 	
+	/**
+	 * ie9 jquery.form.ajax文件上传返回是字符串,转换成对象;
+	 */
+	function fixie9(d){
+		if(typeof d == "string"){
+			return JSON.parse(d);
+		}
+		return d;
+	}
+	
+	function go(url, $container, data){
+		if(!!!$container)
+			$container = $(".detail-right-content");
+		
+		var opt = {
+			url: url,
+			cache:false,
+			complete: function ( data ) {
+				//如果session超时什么都不做;
+				if(!!window.sessionTimeout){
+				}else{
+					$container.html( data.responseText );
+				}
+			}	
+		}
+		if(!!data && $.type(data) == "object"){
+			$.extend(opt, {type:"post", data:data});
+		}
+		$.ajax(opt);
+	}
+	
 	return {
-		"session_ajax_timeout":session_ajax_timeout
+		"session_ajax_timeout":session_ajax_timeout,
+		"go":go,
+		"fixie9":fixie9
 	};
 })(jQuery);
 
