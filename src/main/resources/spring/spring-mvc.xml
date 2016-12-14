@@ -32,7 +32,14 @@
 	<mvc:annotation-driven conversion-service="conversionService">
 	  <mvc:message-converters>  
 		        <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">  
-		            <property name="objectMapper" ref="customObjectMapper"></property>  
+		            <property name="objectMapper" ref="customObjectMapper"></property>
+		            <property name="supportedMediaTypes">
+						<list>
+							<value>application/json;charset=UTF-8</value>
+							<value>text/html;charset=UTF-8</value>
+							<!-- 解决ie9ajax文件form提交后弹出文件下载 -->
+						</list>
+					</property>  
 		        </bean>  
 		 </mvc:message-converters>
 	</mvc:annotation-driven>
