@@ -16,5 +16,5 @@
 <link rel="stylesheet" href="${_ctx}/static/js/uploadify/uploadify.css">
 
 <%--main  CSS 文件 --%>
-<link rel="stylesheet" href="${_ctx}/static/css/main.css?<%=me.paddingdun.web.util.ResourceVersion.version() %>">
+<link rel="stylesheet" href="${_ctx}/static/css/main.css?ver=<%=me.paddingdun.web.util.ResourceVersion.version() %>">
 
