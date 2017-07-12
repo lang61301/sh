@@ -27,7 +27,7 @@
          <property name="maxActive" value="20" />
          <!-- 连接池最大空闲 -->
          <property name="maxIdle" value="20" />
-         <!-- 连接池最小空闲 -->
+         <!-- 连接池最小空闲, 此参数最好配置为0, 防止空闲连接不被销毁, 该参数有时要和minEvictableIdleTimeMillis配合使用 -->
          <property name="minIdle" value="0" />
          <!-- 获取连接最大等待时间 -->
          <property name="maxWait" value="60000" />
@@ -39,10 +39,10 @@
          <property name="testOnReturn" value="false" />
          <property name="testWhileIdle" value="true" />
  
-         <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+         <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒, (销毁程序轮训间隔时间) -->
          <property name="timeBetweenEvictionRunsMillis" value="60000" />
-         <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
-         <property name="minEvictableIdleTimeMillis" value="25200000" />
+         <!-- 放入连接池中的空闲连接和生存时间, 单位:毫秒, 该参数关系到连接是否能及时销毁(由于有些数据库的连接在一段时间(可能5分钟内没有使用就会自动断开, 如果该时间配置过长,会造成连接没有被销毁.造成重新获取时执行检测查询造成查询时间非常长.导致程序不能正常响应))-->
+         <property name="minEvictableIdleTimeMillis" value="120000" />
  
          <!-- 打开removeAbandoned功能 -->
          <property name="removeAbandoned" value="true" />
