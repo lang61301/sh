@@ -17,7 +17,9 @@
 	  <commons.fileupload.version>1.2.1</commons.fileupload.version>  
 	  <javassist.version>3.12.1.GA</javassist.version>  
 	  <cxf.version>3.0.2</cxf.version>  
-	  <spring.version>3.2.15.RELEASE</spring.version>  
+	  <spring.version>4.3.9.RELEASE</spring.version>
+	  <antlr.version>3.5.2</antlr.version>
+	  <jackson.version>2.5.4</jackson.version>
   </properties>
   
   <dependencies>
@@ -156,10 +158,17 @@
 	 </dependency>
 	 
 	 <!--aspectjweaver包, spring aop需要用到此包, spring4以后有单独的自己的包 -->
+<!--      <dependency> -->
+<!--          <groupId>org.aspectj</groupId> -->
+<!--          <artifactId>aspectjweaver</artifactId> -->
+<!--          <version>1.8.5</version> -->
+<!--      </dependency> -->
+     
+      <!--spring-aspects包, spring aop需要用到此包, spring4使用此包代替aspectjweaver-->
      <dependency>
-         <groupId>org.aspectj</groupId>
-         <artifactId>aspectjweaver</artifactId>
-         <version>1.8.5</version>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-aspects</artifactId>
+         <version>${spring.version}</version>
      </dependency>
 	 
 	 
@@ -207,6 +216,13 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql.jdbc.version}</version>
+        </dependency>
+        
+        <!-- oracle 驱动包 -->
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <version>11.2.0.3</version>
         </dependency>
        
        <!--阿里 Druid数据库连接池包 -->
@@ -265,11 +281,34 @@
 	    </dependency>
 	    
 	    <!-- spring mvc 处理json转换 -->
-	    <dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.9.13</version>
+	    <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-core</artifactId>
+		    <version>${jackson.version}</version>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-annotations</artifactId>
+		    <version>${jackson.version}</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>${jackson.version}</version>
+		</dependency>
+
+
+	    
+<!-- 	    <dependency> -->
+<!-- 			<groupId>org.codehaus.jackson</groupId> -->
+<!-- 			<artifactId>jackson-mapper-asl</artifactId> -->
+<!-- 			<version>1.9.13</version> -->
+<!-- 		</dependency> -->
 		
 		<!-- shiro -->
 		<dependency>
@@ -297,6 +336,29 @@
 	        <artifactId>quartz</artifactId>
 	        <version>2.2.1</version>
 	    </dependency>
+	    
+	    <!-- xssprotect need antlr-runtime 3以上 -->
+	    <!-- https://mvnrepository.com/artifact/org.antlr/antlr-runtime -->
+		<dependency>
+		    <groupId>org.antlr</groupId>
+		    <artifactId>antlr-runtime</artifactId>
+		    <version>${antlr.version}</version>
+		</dependency>
+		
+		<!-- xssprotect need antlr 3以上 -->
+		<!-- https://mvnrepository.com/artifact/org.antlr/antlr -->
+		<dependency>
+		    <groupId>org.antlr</groupId>
+		    <artifactId>antlr</artifactId>
+		    <version>${antlr.version}</version>
+		</dependency>
+		
+		<!-- xssprotect -->
+	    <dependency>
+		    <groupId>com.blogspot.radialmind</groupId>
+		    <artifactId>xssProtect</artifactId>
+		    <version>0.1</version>
+		</dependency>
     
 		<!-- https://mvnrepository.com/artifact/org.apache.ant/ant -->
 		<dependency>
@@ -330,6 +392,7 @@
 				<configuration>
 					<source>1.7</source>
 					<target>1.7</target>
+					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
 	  </plugins>
